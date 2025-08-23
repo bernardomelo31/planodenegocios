@@ -1,0 +1,1884 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>PNCF — Investimentos, Agrícola, Pecuária, Forrageiro, Cronograma, Resumos e Fluxo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=swap" rel="stylesheet">
+<style id="oc-theme">
+/* ========================================================== v1
+  ========================================================== */
+:root{
+  /* Paleta base */
+  --oc-azul: #1e66b3;
+  --oc-azul-escuro:#134c84;
+  --oc-azul-acinzentado:#1e3a8a;
+
+  --oc-bg:#f5f7fa;             /* fundo da página */
+  --oc-card:#ffffff;           /* cartões/painéis */
+  --oc-borda:#e5e9f2;          /* linhas */aba
+  --oc-ink:#1f2937;            /* texto principal */
+  --oc-muted:#6b7280;          /* texto secundário */
+
+  --oc-brand:#2563eb;          /* ação primária */
+  --oc-brand-2:#1e40af;        /* realce (sum-cards) */
+  --oc-good:#16a34a;
+  --oc-warn:#d97706;
+  --oc-bad:#dc2626;
+
+  --oc-shadow: 0 8px 28px rgba(0,0,0,.06);
+  --oc-radius: 14px;
+  --oc-radius-sm: 10px;
+
+  --oc-input-bg:#fff;
+  --oc-input-bd:#e5e7eb;
+  --oc-input-bd-focus:#94c0ff;
+
+  /* Tipografia/ritmo */
+  --oc-fs-base:16px;
+  --oc-lh:1.45;
+}
+
+/* ===== Dark mode opcional (adicione <body class="dark"> se quiser) ===== */
+body.dark{
+  --oc-bg:#0b1220;
+  --oc-card:#10192b;
+  --oc-borda:#1f2a44;
+  --oc-ink:#e5eaf3;
+  --oc-muted:#93a4c2;
+  --oc-input-bg:#0f1830;
+  --oc-input-bd:#263251;
+  --oc-input-bd-focus:#3c82ff;
+  --oc-shadow: 0 8px 28px rgba(0,0,0,.35);
+}
+
+/* ===== Base / layout ===== */
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0;
+  background:var(--oc-bg);
+  color:var(--oc-ink);
+  font:var(--oc-fs-base)/var(--oc-lh) system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.container{ max-width:1200px; margin:32px auto; padding:0 16px }
+
+/* ===== Títulos de seção (faixa azul) ===== */
+.section{ margin-bottom:36px }
+.section > h1.title{
+  display:block !important;
+  margin:0 0 12px;
+  padding:12px 16px;
+  background:linear-gradient(180deg,var(--oc-azul) 0%, var(--oc-azul-escuro) 100%);
+  color:#fff;
+  border-radius:var(--oc-radius-sm);
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.2px;
+}
+
+/* ===== Cards / painéis ===== */
+.card{
+  background:var(--oc-card);
+  border:1px solid var(--oc-borda);
+  border-radius:var(--oc-radius);
+  box-shadow:var(--oc-shadow);
+  padding:18px;
+  margin-bottom:16px;
+}
+.subtitle{ font-size:16px; font-weight:700; margin:10px 0 8px; color:#0f172a }
+body.dark .subtitle{ color:#cfe0ff }
+
+/* ===== Grid responsivo ===== */
+.grid{ display:grid; gap:12px; grid-template-columns:repeat(12,1fr) }
+.row-col-12{grid-column:span 12}.row-col-8{grid-column:span 8}.row-col-6{grid-column:span 6}
+.row-col-4{grid-column:span 4}.row-col-3{grid-column:span 3}.row-col-2{grid-column:span 2}.row-col-1{grid-column:span 1}
+@media (max-width:900px){
+  .row-col-12,.row-col-8,.row-col-6,.row-col-4,.row-col-3,.row-col-2,.row-col-1{grid-column:span 12}
+}
+
+/* ===== Campos / formularios ===== */
+.field{ display:flex; flex-direction:column; gap:6px }
+.field label{ font-size:13px; color:var(--oc-muted) }
+
+input[type="text"],input[type="number"],input[type="month"],input[type="date"],select,textarea{
+  width:100%;
+  padding:12px 10px;
+  border:1px solid var(--oc-input-bd);
+  border-radius:12px;
+  background:var(--oc-input-bg);
+  color:inherit;
+  outline:none;
+  transition:border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+textarea{ min-height:220px; resize:vertical }
+input[readonly]{ background:color-mix(in srgb, var(--oc-input-bg), var(--oc-ink) 4%); }
+
+/* Acessibilidade de foco */
+:where(input,select,textarea,.btn):focus-visible{
+  outline:2px solid transparent;
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--oc-azul) 60%, #ffffff 0%);
+  border-color:var(--oc-input-bd-focus);
+}
+
+/* Hints */
+.hint{ font-size:12px; color:var(--oc-muted) }
+
+/* ===== Botões ===== */
+.actions{ display:flex; gap:10px; margin-top:10px; flex-wrap:wrap }
+.btn{
+  --_bg: var(--oc-brand);
+  --_fg: #fff;
+  border:0;
+  padding:12px 16px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:700;
+  background:var(--_bg);
+  color:var(--_fg);
+  transition:transform .06s ease, filter .15s ease, background .15s ease;
+}
+.btn:hover{ filter:brightness(1.05) }
+.btn:active{ transform:translateY(1px) }
+.btn.outline{
+  --_bg: transparent; --_fg: var(--oc-brand);
+  border:2px solid var(--oc-brand);
+}
+.btn.danger{ --_bg: var(--oc-bad) }
+.btn.info{ --_bg: #0ea5e9 }
+.btn.btn-icon{ width:44px; height:44px; padding:0; display:inline-flex; align-items:center; justify-content:center }
+
+/* ===== Badges / contadores ===== */
+.badge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:6px 10px; border-radius:999px; font-size:12px;
+  background:#e8effc; color:var(--oc-azul-acinzentado); font-weight:700;
+  border:1px solid color-mix(in srgb, var(--oc-azul) 15%, #fff 85%);
+}
+body.dark .badge{ background:#0f1a38; color:#cfe0ff; border-color:#243866 }
+/* ===== Ajuste do CTA de Investimentos ===== */
+
+/* joga a barra de ações do formulário para a direita */
+#invest-form .actions{
+  justify-content: flex-end;
+}
+
+/* botão quadrado (sem cantos arredondados) */
+.btn-cta{
+  border-radius: 0 !important;   /* sobrescreve o .btn padrão */
+}
+
+/* opcional: “feeling” mais firme (pode remover se não quiser) */
+.btn-cta {
+  box-shadow: 0 2px 0 rgba(0,0,0,.15);
+}
+.btn-cta:active {
+  transform: none; 
+  box-shadow: none;
+}
+
+/* Alinhar o botão de ação principal à direita */
+#agr-form .actions,
+#pec-form .actions,
+#cron-form .actions{
+  justify-content: flex-end;
+}
+
+/* Deixar o botão principal sem cantos arredondados */
+#agr-btnSalvar,
+#pec-btnSalvar,
+#cron-btnSalvar{
+  border-radius: 0 !important;
+}
+
+/* ===== Tabelas ===== */
+.table-wrap{
+  max-height:420px; overflow:auto;
+  border:1px solid var(--oc-borda);
+  border-radius:14px; padding:6px;
+  background:color-mix(in srgb, var(--oc-card) 90%, var(--oc-bg) 10%);
+}
+table{ width:100%; border-collapse:separate; border-spacing:0 8px }
+thead th{
+  text-align:left; font-size:12px; color:var(--oc-muted); font-weight:800;
+  padding:6px 10px; position:sticky; top:0; z-index:1;
+  background:linear-gradient(180deg,#f7f9fc 0%,#f1f5fb 100%);
+  border-bottom:1px solid var(--oc-borda);
+}
+tbody tr{ background:var(--oc-card); box-shadow:0 4px 18px rgba(0,0,0,.05) }
+tbody td{
+  padding:10px; border-top:1px solid #eef2f7; border-bottom:1px solid #eef2f7; vertical-align:top
+}
+tbody td:first-child{ border-left:1px solid #eef2f7; border-top-left-radius:12px; border-bottom-left-radius:12px }
+tbody td:last-child{ border-right:1px solid #eef2f7; border-top-right-radius:12px; border-bottom-right-radius:12px }
+.table-actions{ display:flex; gap:8px }
+
+/* Tabelas responsivas (mobile) */
+@media (max-width:900px){
+  thead{ display:none }
+  tbody td{ display:block }
+  tbody td::before{ content:attr(data-label); display:block; font-size:12px; color:var(--oc-muted) }
+  .table-actions{ justify-content:flex-end }
+}
+
+/* ===== Sum cards (resumo por fonte) ===== */
+.sum-cards{ display:grid; grid-template-columns:repeat(12,1fr); gap:12px; margin-top:12px }
+.sum-card{
+  grid-column:span 4; border-radius:14px; padding:14px 16px;
+  box-shadow:var(--oc-shadow);
+}
+.sum-card .cap{ font-size:12px; opacity:.95; margin-bottom:4px; letter-spacing:.2px }
+.sum-card .num{ font-size:22px; font-weight:900; letter-spacing:.2px }
+.theme-blue .sum-card{ background:var(--oc-brand-2); color:#fff }
+.theme-gray .sum-card{ background:#eef2f7; color:#111827 }
+body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
+@media (max-width:900px){ .sum-card{ grid-column:span 12 } }
+
+/* ===== Bloco de instruções / anexos ===== */
+.info-use .info-box{
+  display:flex; gap:12px; align-items:flex-start;
+  background:#f8fbff; border:1px solid #dbeafe; border-radius:12px; padding:12px 14px;
+}
+.info-use .info-icn{
+  width:22px; height:22px; border-radius:999px; display:inline-grid; place-items:center;
+  background:var(--oc-brand); color:#fff; font-weight:800; font-size:13px; flex:0 0 22px; margin-top:2px;
+}
+.info-use .info-title{ font-weight:800; margin:0 0 2px; color:#0f172a }
+.info-use p{ margin:2px 0; color:#374151; font-size:14px }
+.info-use .inline-actions{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px }
+.info-use .input-attach{ display:flex; gap:8px; align-items:center }
+.info-use .input-attach input{ flex:1; padding:12px 10px; border:1px solid var(--oc-input-bd); border-radius:12px; background:var(--oc-input-bg) }
+.info-use .download .btn{ height:44px; display:inline-flex; align-items:center }
+@media (max-width:900px){ .info-use .inline-actions{ grid-template-columns:1fr } }
+
+/* ===== Divisores / grupos ===== */
+.section-divider{ height:1px; background:var(--oc-borda); margin:10px 0 2px }
+.row-group{ background:color-mix(in srgb, var(--oc-card) 88%, var(--oc-bg) 12%) !important; font-weight:800 }
+.row-sub td:first-child{ padding-left:24px }
+
+/* ===== Cronograma grid ===== */
+.grid-cron{
+  display:grid; gap:12px;
+  grid-template-columns: minmax(280px,2fr) minmax(90px,.7fr) minmax(140px,.9fr) minmax(90px,.6fr) minmax(120px,.8fr);
+  align-items:start;
+}
+@media (max-width:900px){ .grid-cron{ grid-template-columns:1fr } }
+
+/* ===== Fluxo: parâmetros e tabela ===== */
+.grid-flow{
+  display:grid; gap:12px;
+  grid-template-columns:minmax(280px,1.2fr) minmax(140px,.7fr) minmax(140px,.7fr) minmax(160px,.8fr);
+  align-items:end;
+}
+.grid-flow .field input[readonly]{ background:#f8fafc }
+.flow-legend{ font-weight:800; color:#0f172a; margin-bottom:6px }
+#sec-fluxo .table-wrap{ max-height:none; overflow-y:visible; overflow-x:auto }
+#sec-fluxo table#fluxo-tabela{ font-size:14px }
+#sec-fluxo table#fluxo-tabela thead th{ font-size:12px; padding:6px 8px }
+#sec-fluxo table#fluxo-tabela td:first-child,
+#sec-fluxo table#fluxo-tabela th:first-child{
+  width:44ch; max-width:44ch; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-right:10px;
+}
+#sec-fluxo table#fluxo-tabela tbody td:not(:first-child),
+#sec-fluxo table#fluxo-tabela thead th:not(:first-child){ padding:8px 8px }
+#sec-fluxo .row-group td, #sec-fluxo .row-sub td{ line-height:1.2 }
+
+/* ===== Ícones Material ===== */
+.material-icons, .material-symbols-outlined{
+  font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+  font-size:20px; line-height:1;
+}
+
+/* ===== Animações sutis ===== */
+@media (prefers-reduced-motion:no-preference){
+  .btn, input, select, textarea, .card, .sum-card{ transition: box-shadow .2s ease, transform .08s ease, background-color .2s ease }
+  .card:hover{ box-shadow:0 10px 30px rgba(0,0,0,.08) }
+}
+
+/* ===== Acessibilidade extra ===== */
+:where(button,.btn,[role="button"]){ position:relative }
+:where(button,.btn,[role="button"]):focus-visible::after{
+  content:""; position:absolute; inset:-4px; border-radius:14px;
+  outline:2px solid color-mix(in srgb, var(--oc-azul) 65%, #fff 0%); outline-offset:0;
+}
+
+/* ===== Impressão ===== */
+@media print{
+  body{ background:#fff }
+  .container{ max-width:100%; margin:0; padding:0 }
+  .card, .table-wrap{ box-shadow:none; border-color:#ccc }
+  .actions, .btn{ display:none !important }
+  .section > h1.title{ -webkit-print-color-adjust:exact; print-color-adjust:exact }
+}
+/* Linhas em uma única linha (desktop) */
+@media (min-width:901px){
+  .table-wrap table thead th,
+  .table-wrap table tbody td{
+    white-space: nowrap;       /* não quebra linha */
+  }
+}
+/* Esconder os botões auxiliares dos formulários */
+#invest-btnLimpar, #invest-btnExportar, #invest-btnApagarTudo,
+#agr-btnLimpar,    #agr-btnExportar,    #agr-btnApagarTudo,
+#pec-btnLimpar,    #pec-btnExportar,    #pec-btnApagarTudo{
+  display:none !important;
+}
+
+/* ícone herda a cor do botão */
+.btn .material-icons { color: currentColor; }
+
+/* texto apenas para leitores de tela */
+.sr-only{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+/* Barra superior fixa com o botão de relatório */
+.topbar{
+  position: sticky; top: 0; z-index: 1000;
+  background: var(--oc-bg);
+  border-bottom: 1px solid var(--oc-borda);
+  backdrop-filter: blur(6px);
+}
+.topbar-inner{
+  max-width: 1200px; margin: 0 auto; padding: 10px 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.topbar .brand{ font-weight: 800; letter-spacing: .2px; color: var(--oc-azul-acinzentado); }
+.topbar .btn{ margin-left: auto; }
+@media print{ .topbar{ display:none !important; } }
+
+</style>
+
+</head>
+
+<body>
+<header class="topbar no-print">
+  <div class="topbar-inner">
+    <div class="brand"><strong>PNCF</strong> — Projeto Produtivo</div>
+    <button id="btnRelatorio" class="btn">
+      <span class="material-icons" aria-hidden="true">picture_as_pdf</span>
+      <span>Gerar Relatório (PDF)</span>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ======================================================= -->
+  <!-- 1) INVESTIMENTOS                                       -->
+  <!-- ======================================================= -->
+  <section class="section" id="sec-invest">
+    <h1 class="title">Investimentos</h1>
+
+    <form id="invest-form" class="card">
+      <div class="grid">
+ <div class="field row-col-8"><label for="invest-descricao">Descrição da atividade</label><select id="invest-descricao" required><option value="" selected disabled>Selecione...</option><option value="Abacate Irrigado ">	Abacate Irrigado </option>
+<option value="	Abacate Sequeiro">	Abacate Sequeiro (Agricultura/Fruticultura)	</option>
+<option value="	Abacaxi Irrigado (Agricultura/Fruticultura)	">	Abacaxi Irrigado (Agricultura/Fruticultura)	</option>
+<option value="	Abacaxi Sequeiro (Agricultura/Fruticultura)	">	Abacaxi Sequeiro (Agricultura/Fruticultura)	</option>
+<option value="	Abobora Irrigado (Agricultura/Olericultura)	">	Abobora Irrigado (Agricultura/Olericultura)	</option>
+<option value="	Abobora Sequeiro (Agricultura/Olericultura)	">	Abobora Sequeiro (Agricultura/Olericultura)	</option>
+<option value="	Acai Irrigado">	Acai Irrigado (Agricultura/Fruticultura)	</option>
+<option value="	Acai Sequeiro">	Acai Sequeiro (Agricultura/Fruticultura)	</option>
+<option value="	Acelga (Agricultura/Olericultura)	">	Acelga (Agricultura/Olericultura)	</option>
+<option value="	Acerola Irrigado (Agricultura/Fruticultura)	">	Acerola Irrigado (Agricultura/Fruticultura)	</option>
+<option value="	Acerola Sequeiro (Agricultura/Fruticultura)	">	Acerola Sequeiro (Agricultura/Fruticultura)	</option>
+<option value="	Adubos,fertilizantes e corretivos do solo (Comercio/Com.Atacadista)	">	Adubos,fertilizantes e corretivos do solo (Comercio/Com.Atacadista)	</option>
+<option value="	Agricultura/Agrossilvicultura (Agricultura/Ecologico)	">	Agricultura/Agrossilvicultura (Agricultura/Ecologico)	</option>
+<option value="	Capim Capiaçu	">	Capim Capiaçu		</option>
+<option value="	Bovinos - Aptidão Leite - Matriz 	">	Bovinos - Aptidão Leite - Matriz 	</option>
+<option value="	SAF (Dendê + Cacau + Essência Florestal)">SAF (Dendê + Cacau + Essência Florestal)</option>
+
+</select></div>
+                <div class="field row-col-4"><label for="invest-categoria">Categoria</label><select id="invest-categoria" required><option value="" selected disabled>Selecione...</option><option value="AMBIENTAL">AMBIENTAL</option>
+<option value="ELETRIFICACAO">ELETRIFICAÇÃO</option>
+<option value="HABITACAO">HABITAÇÃO</option>
+<option value="EQUIPAMENTOS">EQUIPAMENTOS</option>
+<option value="OUTROS">OUTROS</option>
+<option value="PRODUTIVO">PRODUTIVO</option>
+<option value="HIDRICOS">HÍDRICOS</option>
+<option value="ACESSOS">ACESSOS</option>
+</select></div>
+        <div class="field row-col-4"><label for="invest-item">Uso</label><select id="invest-item" required><option value="" selected disabled>Selecione...</option>
+<option value="Cobertura do Solo">Cobertura do Solo</option>
+<option value="Construções Civis">Construções Civis</option>
+<option value="Instalações">Instalações</option>
+<option value="Máq./Equip. Nacionais">Máq./Equip. Nacionais</option>
+<option value="Máq./Equip. Estrangeiros">Máq./Equip. Estrangeiros</option>
+<option value="Móveis e Utensílios">Móveis e Utensílios</option>
+<option value="Semoventes">Semoventes</option>
+<option value="Outras Inv. Financeiras">Outras Inv. Financeiras</option>
+<option value="Obras Preliminares">Obras Preliminares</option>
+<option value="Outras Inversões">Outras Inversões</option>
+<option value="Outras Desp. Implantação">Outras Desp. Implantação</option>
+<option value="Ração e Volumoso">Ração e Volumoso</option>
+<option value="Sais Minerais">Sais Minerais</option>
+<option value="Vacinas e Medicamentos">Vacinas e Medicamentos</option>
+</select></div>
+        <div class="field row-col-4"><label for="invest-unidade">Unidade</label><select id="invest-unidade" required><option value="" selected disabled>Selecione...</option><option value="	Arroba	">	Arroba	</option>
+<option value="	Cabeça	">	Cabeça	</option>
+<option value="	Caixa	">	Caixa	</option>
+<option value="	Dz	">	Dz	</option>
+<option value="	Gal	">	Gal	</option>
+<option value="	garrafa	">	garrafa	</option>
+<option value="	Ha	">	Ha	</option>
+<option value="	hl	">	hl	</option>
+<option value="	kg	">	kg	</option>
+<option value="	l	">	l	</option>
+<option value="	Lata	">	Lata	</option>
+<option value="	m2	">	m2	</option>
+<option value="	m2 ranario	">	m2 ranario	</option>
+<option value="	m3	">	m3	</option>
+<option value="	Maço	">	Maço	</option>
+<option value="	Mil Cab	">	Mil Cab	</option>
+<option value="	Mil Dúzias	">	Mil Dúzias	</option>
+<option value="	Mil Litros	">	Mil Litros	</option>
+<option value="	Mil Mudas	">	Mil Mudas	</option>
+<option value="	Mil Pés	">	Mil Pés	</option>
+<option value="	Mil Unid	">	Mil Unid	</option>
+<option value="	Pacote	">	Pacote	</option>
+<option value="	Pés	">	Pés	</option>
+<option value="	t	">	t	</option>
+<option value="	T/Ha	">	T/Ha	</option>
+<option value="	UA	">	UA	</option>
+<option value="	Unidade	">	Unidade	</option>
+</select></div>
+        <div class="field row-col-4"><label for="invest-atividade">Atividade</label><select id="invest-atividade" required><option value="" selected disabled>Selecione...</option><option>Agrícola</option><option>Pecuário(a)</option></select></div>
+        <div class="field row-col-6"><label for="invest-quantidade">Quantidade</label><input id="invest-quantidade" type="number" step="0.01" min="0" max="99999" required></div>
+        <div class="field row-col-6"><label for="invest-valorUnitario">Valor Unitário (R$)</label><input id="invest-valorUnitario" type="text" required placeholder="R$ 0,00" inputmode="decimal"></div>
+        <div class="field row-col-6"><label for="invest-valorTotal">Valor Total (R$)</label><input id="invest-valorTotal" type="text" readonly placeholder="R$ 0,00"></div>
+        <div class="field row-col-6"><label for="invest-fonte">Fonte de Investimento</label><select id="invest-fonte" required><option value="" selected disabled>Selecione...</option><option>SIB</option><option>PRONAF</option><option>RECURSOS PRÓPRIOS</option></select></div>
+      </div>
+      <div class="actions">
+
+
+        <button class="btn btn-cta" type="submit" id="invest-btnSalvar">Adicionar à tabela</button>
+        <button class="btn outline" type="button" id="invest-btnLimpar">Limpar</button>
+        <button class="btn info" type="button" id="invest-btnExportar">Exportar CSV</button>
+        <button class="btn danger" type="button" id="invest-btnApagarTudo">Apagar tudo</button>
+      </div>
+      <div class="hint">Os dados ficam salvos no navegador (localStorage).</div>
+      <input type="hidden" id="invest-editIndex" value="-1">
+    </form>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <h2 class="title" style="font-size:18px;margin:0">Tabela de Investimentos</h2>
+        <span class="badge" id="invest-badgeCount">0 itens</span>
+      </div>
+      <div class="table-wrap">
+        <table id="invest-tabela">
+          <thead><tr><th>Descrição</th><th>Categoria</th><th>Item</th><th>Unidade</th><th>Quantidade</th><th>Valor Unitário (R$)</th><th>Valor Total (R$)</th><th>Atividade</th><th>Fonte</th><th style="width:130px">Ações</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="totals">Total geral: <span id="invest-totalGeral">R$ 0,00</span></div>
+        <br>
+<!-- Anexos Complementares -->
+        <div class="field">
+          <label>Anexar orçamentos, plantas baixas e documentos complementares relacionados ao projeto produtivo</label>
+          <div class="ax-row">
+            <input id="ax-plantas-text" type="text" placeholder="Selecione um arquivo..." readonly />
+            <input id="ax-plantas-file" type="file" hidden />
+            <button type="button" class="btn outline ax-clip" data-target="ax-plantas-file" title="Anexar">
+              <span class="material-icons">attach_file</span>
+            </button>
+          </div>
+        </div>
+ <br>
+    </div>
+<!-- Resumo por fonte de investimento -->
+<div class="sum-cards theme-blue" id="invest-sum-cards">
+  <!-- Troque theme-blue por theme-gray se quiser cinza claro -->
+  <div class="sum-card">
+    <div class="cap">SIB Total (R$)</div>
+    <div class="num" id="invest-sum-sib">R$ 0,00</div>
+  </div>
+  <div class="sum-card">
+    <div class="cap">PRONAF A Total (R$)</div>
+    <div class="num" id="invest-sum-pronaf">R$ 0,00</div>
+  </div>
+  <div class="sum-card">
+    <div class="cap">Recursos Próprios Total (R$)</div>
+    <div class="num" id="invest-sum-rp">R$ 0,00</div>
+  </div>
+</div>
+  </section>
+
+
+
+  <!-- ======================================================= -->
+  <!-- 2) ATIVIDADE AGRÍCOLA                                  -->
+  <!-- ======================================================= -->
+  <section class="section" id="sec-agricola">
+    <h1 class="title">Atividades Agrícolas</h1>
+<!-- Instruções de uso – Atividades Agrícolas -->
+<div class="card info-use" id="agri-howto">
+  <div class="info-box">
+    <span class="info-icn" aria-hidden="true">i</span>
+    <div>
+      <div class="info-title">Instruções de uso — Atividades Agrícolas</div>
+
+      <p>Use esta seção para cadastrar cada cultura com área, valor unitário, produtividade esperada e demais parâmetros.
+        Antes de preencher, consulte as referências oficiais para definir <em>janela(s) de plantio</em>, <em>ciclo/cultivar</em>, 
+        <em>nível de risco</em> e <em>custos</em>.</p>
+
+      <ul>
+        <li><strong>ZARC – Zoneamento Agrícola de Risco Climático:</strong>
+          confira para o seu município a cultura, ciclo e janelas de plantio e escolha o nível de risco.<br>
+          • <a href="https://mapa-indicadores.agricultura.gov.br/publico/extensions/Zarc/Zarc.html" target="_blank" rel="noopener">Acessar o ZARC (web)</a> •
+          <a href="https://www.gov.br/agricultura/pt-br/assuntos/riscos-seguro/programa-nacional-de-zoneamento-agricola-de-risco-climatico/plantio-certo" target="_blank" rel="noopener">Baixar o app Plantio Certo</a>
+        </li>
+        <li><strong>Custos de produção (CONAB):</strong>
+          utilize as planilhas para estimar custos operacionais e coeficientes técnicos da cultura.
+          <a href="https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/custos-de-producao/planilhas-de-custos-de-producao" target="_blank" rel="noopener">Planilhas de custos</a>
+        </li>
+        <li><strong>Indicadores (IBGE):</strong>
+          consulte séries de área, produção e rendimento como referência de produtividade.
+          <a href="https://www.ibge.gov.br/explica/producao-agropecuaria/" target="_blank" rel="noopener">Indicadores agropecuários</a>
+        </li>
+      </ul>
+
+      <p>Depois das consultas, preencha os campos do formulário (área em ha, unidade, valor unitário em R$, produtividade por ha, nível tecnológico, etc.).
+        O sistema calcula automaticamente a <em>Receita do 4º ano</em>, o <em>Valor Total</em> (via custo padrão %) e, quando aplicável, o <em>Suporte Forrageiro</em>.</p>
+
+      <p class="hint">Guarde as fontes/planilhas consultadas — você poderá anexá-las ao final do projeto.</p>
+    </div>
+  </div>
+
+  </div>
+
+    <form id="agr-form" class="card">
+      <div class="subtitle">Informações da Cultura</div>
+      <div class="grid">
+        <div class="field row-col-6"><label for="agr-descCultura">Descrição da Cultura</label><input id="agr-descCultura" type="text" maxlength="255"></div>
+        <div class="field row-col-3"><label for="agr-nivelTec">Nível Tecnológico</label><select id="agr-nivelTec" required><option value="" selected disabled>Selecione...</option><option>Baixo</option><option>Médio</option><option>Alto</option></select></div>
+        <div class="field row-col-3"><label for="agr-espacamento">Espaçamento</label><input id="agr-espacamento" type="text" placeholder="3,0 x 2,0 m"></div>
+        <div class="field row-col-3"><label for="agr-exploracao">Exploração</label><select id="agr-exploracao" required><option value="" selected disabled>Selecione...</option><option>AGRÍCOLA</option><option>PECUÁRIA</option></select></div>
+        <div class="field row-col-3"><label for="agr-tipoCultura">Tipo de cultura</label><select id="agr-tipoCultura" required><option value="" selected disabled>Selecione...</option><option>Anual</option>
+<option>Forragem</option>
+<option>Permanente</option>
+<option>Semi-permanente</option></select></div>
+        <div class="field row-col-3"><label for="agr-uaha">UA/ha</label><input id="agr-uaha" type="number" min="0" max="999.99" step="0.01" placeholder="0,00" inputmode="decimal"></div>
+        <div class="field row-col-3"><label for="agr-consorciada">Consorciada</label><select id="agr-consorciada" required><option value="" selected disabled>Selecione...</option><option>Não</option><option>Sim</option></select></div>
+      </div>
+
+      <div class="section-divider"></div>
+      <div class="subtitle">Zoneamento</div>
+      <div class="grid">
+        <div class="field row-col-3"><label for="agr-solo">Solo</label><select id="agr-solo" required><option value="" selected disabled>Selecione...</option><option>Arenoso</option>
+<option>Textura Média</option>
+<option>Argiloso</option>
+<option>Desconhecido</option>
+<option>AD1</option>
+<option>AD2</option>
+<option>AD3</option>
+<option>AD4</option>
+<option>AD5</option>
+<option>AD6</option></select></div>
+        <div class="field row-col-3"><label for="agr-ciclo">Ciclo</label><select id="agr-ciclo" required><option value="" selected disabled>Selecione...</option><option>Grupo I</option>
+<option>Grupo II</option>
+<option>Grupo III</option>
+<option>Grupo IV</option>
+<option>Tardio</option>
+<option>Intermediário</option>
+<option>Superprecoce</option>
+<option>Semiprecoce</option>
+<option>Perene</option>
+<option>Curto</option>
+<option>Muito curto</option>
+</select></div>
+        <div class="field row-col-3"><label for="agr-risco">Risco</label><select id="agr-risco" required><option value="" selected disabled>Selecione...</option><option>Não se aplica</option><option>20%</option><option>30%</option><option>40%</option></select></div>
+        <div class="field row-col-3"><label for="agr-irrigacao">Irrigação</label><select id="agr-irrigacao" required><option value="" selected disabled>Selecione...</option><option value="Não Irrigado">Não Irrigado</option>
+<option value="Gotejamento">Gotejamento</option>
+<option value="Micro-aspersão">Micro-aspersão</option>
+<option value="Aspersão">Aspersão</option>
+<option value="Xique-Xique">Xique-Xique</option>
+<option value="Pivô">Pivô</option>
+<option value="Canhão">Canhão</option>
+<option value="Auto-Propelido">Auto-Propelido</option>
+<option value="Sulcos">Sulcos</option>
+<option value="Inundação">Inundação</option></select></div>
+        <div class="field row-col-3"><label for="agr-plantioIni">Início Plantio</label><input id="agr-plantioIni" type="date"></div>
+        <div class="field row-col-3"><label for="agr-plantioFim">Final Plantio</label><input id="agr-plantioFim" type="date"></div>
+        <div class="field row-col-3"><label for="agr-colheitaIni">Início Colheita</label><input id="agr-colheitaIni" type="date"></div>
+        <div class="field row-col-3"><label for="agr-colheitaFim">Final Colheita</label><input id="agr-colheitaFim" type="date"></div>
+      </div>
+
+      <div class="section-divider"></div>
+      <div class="subtitle">Produtividade</div>
+      <div class="grid">
+        <div class="field row-col-3"><label for="agr-areaHa">Área (ha)</label><input id="agr-areaHa" type="number" min="0" max="9999.99" step="0.01" required placeholder="0,00" inputmode="decimal"></div>
+        <div class="field row-col-3"><label for="agr-produtividade">Produtividade (ha)</label><input id="agr-produtividade" type="number" min="0" step="0.01" required placeholder="0,00" inputmode="decimal"></div>
+        <div class="field row-col-3"><label for="agr-unidade">Unidade</label><select id="agr-unidade" required><option value="" selected disabled>Selecione...</option><option>Saca</option><option>Kg</option><option>Caixa</option><option>Litro</option></select></div>
+        <div class="field row-col-3"><label for="agr-valorUnit">Valor Unitário (R$)</label><input id="agr-valorUnit" type="text" required placeholder="R$ 0,00" inputmode="decimal"></div>
+
+
+        <div class="field row-col-3"><label for="agr-receitaAnual">Receita a partir do 4º ano (R$)</label><input id="agr-receitaAnual" type="text" readonly placeholder="R$ 0,00"></div>
+        <div class="field row-col-3"><label for="agr-custoPadrao">Custo padrão (%)</label><input id="agr-custoPadrao" type="text" placeholder="0,00%" inputmode="decimal"></div>
+        <div class="field row-col-3"><label for="agr-valorTotal">Valor Total (R$)</label><input id="agr-valorTotal" type="text" readonly placeholder="R$ 0,00"></div>
+        <div class="field row-col-3"><label for="agr-suporte">Suporte Forrageiro (UA)</label><input id="agr-suporte" type="text" readonly placeholder="0,00"></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-cta" type="submit" id="agr-btnSalvar">Adicionar à tabela</button>
+        <button class="btn outline" type="button" id="agr-btnLimpar">Limpar</button>
+        <button class="btn info" type="button" id="agr-btnExportar">Exportar CSV</button>
+        <button class="btn danger" type="button" id="agr-btnApagarTudo">Apagar tudo</button>
+      </div>
+      <div class="hint">Os dados ficam salvos no navegador (localStorage).</div>
+      <input type="hidden" id="agr-editIndex" value="-1">
+    </form>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <h2 class="title" style="font-size:18px;margin:0">Tabela de Atividades Agrícolas</h2>
+        <span class="badge" id="agr-badgeCount">0 itens</span>
+      </div>
+      <div class="table-wrap">
+        <table id="agr-tabela">
+          <thead>
+            <tr>
+              <th>Descrição da Cultura</th><th>Nível Tec.</th><th>Espaçamento</th><th>Exploração</th><th>Tipo</th>
+              <th>UA/ha</th><th>Consorciada</th>
+              <th>Solo</th><th>Ciclo</th><th>Risco</th><th>Irrigação</th>
+              <th>Plantio (Início–Fim)</th><th>Colheita (Início–Fim)</th>
+              <th>Área (ha)</th><th>Unidade</th><th>Valor Unit. (R$)</th><th>Produtividade (ha)</th>
+              <th>Receita média a partir do 4º ano (R$)</th><th>Custo padrão (%)</th><th>Valor Total (R$)</th>
+              <th>Sup. Forrageiro (UA)</th>
+              <th style="width:130px">Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="totals">Total geral (Valor Total): <span id="agr-totalGeral">R$ 0,00</span></div>
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- 3) ATIVIDADE PECUÁRIA                                  -->
+  <!-- ======================================================= -->
+
+  <section class="section" id="sec-pecuaria">
+    <h1 class="title">Atividade Pecuária</h1>
+<!-- Instruções de uso – Pecuária / Suporte Forrageiro -->
+<div class="card info-use">
+  <div class="info-box">
+    <span class="info-icn" aria-hidden="true">i</span>
+    <div>
+      <div class="info-title">Instruções de uso</div>
+<p>Este módulo apoia o planejamento da pecuária, incluindo bovinocultura de leite e corte, ovinos, caprinos e suínos, auxiliando no cálculo de rebanhos, receitas e suporte forrageiro.</p>
+      <p>Baixe a planilha de apoio disponível abaixo.</p>
+      <p>Preencha os dados de animais a adquirir e de estabilização do rebanho.</p>
+      <p>A planilha fará automaticamente os cálculos de evolução do rebanho e de suporte forrageiro.</p>
+      <p>Após o preenchimento, insira os resultados nos campos abaixo (atividade, quantidade, unidade, valor unitário, custo e receita anual) para dar continuidade ao projeto.</p>
+    </div>
+  </div>
+
+  <div class="inline-actions">
+    <!-- Download da planilha -->
+    <div class="download">
+      <label class="hint">Planilha de cálculo de evolução do rebanho e Suporte Forrageiro</label><br>
+        <button type="button" class="btn outline btn-icon" title="Anexar arquivo (visual)">
+    <span class="material-symbols-outlined">Download</span>
+  </button>
+
+    </div>
+
+    <!-- “Anexar” (somente visual) -->
+    <div class="upload">
+      <label class="hint">Anexar planilha de cálculo preenchida</label>
+      <div class="input-attach">
+        <input type="text" placeholder="Selecione um arquivo..." readonly>
+        <button type="button" class="btn outline btn-icon" title="Anexar arquivo (visual)">
+    <span class="material-symbols-outlined">attach_file</span>
+  </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <form id="pec-form" class="card">
+      <div class="grid">
+  <div class="field row-col-8"><label for="pec-desc">Atividade Pecuário(a)</label><select id="pec-desc" required><option value="" selected disabled>Selecione...</option><option>Apicultura</option>
+<option>Asinino</option>
+<option>Avicultura de corte</option>
+<option>Avicultura de postura</option>
+<option>Bovinocultura de corte</option>
+<option>Bovinocultura de leite</option>
+<option>Bubalinocultura de corte</option>
+<option>Bubalinocultura de leite</option>
+<option>Caprinocultura</option>
+<option>Carcinicultura</option>
+<option>Carcinicultura marinha</option>
+<option>Engorda</option>
+<option>Equino</option>
+<option>Muar</option>
+<option>Ovinocultura</option>
+<option>Pescaartesanal</option>
+<option>Piscicultura</option>
+<option>Ranicultura</option>
+<option>Recria</option>
+<option>Sericicultura</option>
+<option>Suinocultura</option></select></div>
+        <div class="field row-col-4"><label for="pec-eco">Item comercializado</label><select id="pec-eco" required><option value="" selected disabled>Selecione...</option>
+<option>Matrizes Descartadas</option>
+<option>Novilho Vendido</option>
+<option>Novilha Vendida</option>
+<option>Queijo (Kg)</option>
+<option>Leite Para Venda</option>
+</select></div>
+        <div class="field row-col-3"><label for="pec-quantidade">Quantidade</label><input id="pec-quantidade" type="number" step="0.01" min="0" required placeholder="0,00"></div>
+        <div class="field row-col-3"><label for="pec-unidade">Unidade</label><select id="pec-unidade" required><option value="" selected disabled>Selecione...</option><option>CABEÇA</option><option>LITRO</option><option>KG</option><option>ARROBA</option><option>DOSE</option><option>HECTARE</option></select></div>
+        <div class="field row-col-3"><label for="pec-valorUnit">Valor Unitário (R$)</label><input id="pec-valorUnit" type="text" required placeholder="R$ 0,00" inputmode="decimal"></div>
+
+        <div class="field row-col-3"><label for="pec-custoPadrao">Custo padrão (%)</label><input id="pec-custoPadrao" type="text" placeholder="0,00%" inputmode="decimal"></div>
+        <div class="field row-col-3"><label for="pec-receita">Receita Anual a partir do 4º Ano (R$)</label><input id="pec-receita" type="text" readonly placeholder="R$ 0,00"></div>
+        <div class="field row-col-3"><label for="pec-valorTotal">Valor Total (R$)</label><input id="pec-valorTotal" type="text" readonly placeholder="R$ 0,00"></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-cta" type="submit" id="pec-btnSalvar">Adicionar à tabela</button>
+        <button class="btn outline" type="button" id="pec-btnLimpar">Limpar</button>
+        <button class="btn info" type="button" id="pec-btnExportar">Exportar CSV</button>
+        <button class="btn danger" type="button" id="pec-btnApagarTudo">Apagar tudo</button>
+      </div>
+      <div class="hint">Os dados ficam salvos no navegador (localStorage).</div>
+      <input type="hidden" id="pec-editIndex" value="-1">
+    </form>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <h2 class="title" style="font-size:18px;margin:0">Tabela de Atividade Pecuária</h2>
+        <span class="badge" id="pec-badgeCount">0 itens</span>
+      </div>
+      <div class="table-wrap">
+        <table id="pec-tabela">
+          <thead>
+            <tr>
+              <th>Descrição da Atividade</th><th>Atividade Econômica</th><th>Quantidade</th><th>Unidade</th>
+              <th>Valor Unitário (R$)</th><th>Custo padrão (%)</th><th>Receita Anual (R$)</th><th>Valor Total (R$)</th>
+              <th style="width:130px">Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="totals">Total geral (Valor Total): <span id="pec-totalGeral">R$ 0,00</span></div>
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- 4) SUPORTE FORRAGEIRO                                   -->
+  <!-- ======================================================= -->
+  <section class="section" id="sec-forrageiro">
+    <h1 class="title">Suporte Forrageiro</h1>
+    <form id="forr-form" class="card">
+      <div class="grid">
+        <div class="field row-col-3"><label for="forr-preserv">Preservação da Propriedade (ha)</label><input id="forr-preserv" type="number" min="0" step="0.01" value="0"></div>
+        <div class="field row-col-3"><label for="forr-benf">Ocupado com benfeitorias (ha)</label><input id="forr-benf" type="number" min="0" step="0.01" value="0"></div>
+        <div class="field row-col-3"><label for="outras-areas">Outras áreas (ha)</label><input id="forr-outros" type="number" min="0" step="0.01" value="0"></div>
+        <div class="field row-col-3"><label for="forr-necess">Necessidade de Suporte Forrageiro (UA)</label><input id="forr-necess" type="number" min="0" step="0.01" value="0"></div>
+      </div>
+    </form>
+
+    <div class="card">
+      <div class="subtitle">Uso projetado das terras</div>
+      <div class="table-wrap">
+        <table id="forr-uso">
+          <thead><tr><th>Descrição</th><th>Área (ha)</th><th>UA</th></tr></thead>
+          <tbody>
+            <tr><td>Exploração Agrícola</td><td id="forr-area-agr">0,00</td><td id="forr-ua-agr">0,00</td></tr>
+            <tr><td>Exploração Pecuária</td><td id="forr-area-pec">0,00</td><td id="forr-ua-pec">0,00</td></tr>
+            <tr><td>Preservação da Propriedade (ha)</td><td id="forr-area-pres">0,00</td><td>–</td></tr>
+            <tr><td>Ocupado com Benfeitorias (ha)</td><td id="forr-area-benf">0,00</td><td>–</td></tr>
+	    <tr><td>Outras áreas (ha)</td><td id="forr-area-outros">0,00</td><td>–</td></tr>
+            <tr><td><strong>Totais</strong></td><td id="forr-area-total"><strong>0,00</strong></td><td id="forr-ua-total"><strong>0,00</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subtitle" style="margin-top:12px">Estudo do Suporte Forrageiro</div>
+      <div class="table-wrap">
+        <table id="forr-estudo">
+          <thead><tr><th>Campo</th><th>UA</th></tr></thead>
+          <tbody>
+            <tr><td>Suporte Forrageiro Previsto</td><td id="forr-prev">0,00</td></tr>
+            <tr><td>Necessidade de Suporte Forrageiro</td><td id="forr-nec">0,00</td></tr>
+            <tr><td><strong>Resultado</strong></td><td id="forr-res">0,00</td></tr>
+            <tr><td><strong>Situação</strong></td><td id="forr-sit">–</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+<!-- ======================================================= -->
+
+  <!-- ======================================================= -->
+  <!-- 5) CRONOGRAMA                                          -->
+  <!-- ======================================================= -->
+  <section class="section" id="sec-cronograma">
+    <h1 class="title">Cronograma de desembolso</h1>
+
+    <form id="cron-form" class="card">
+      <div class="grid-cron">
+        <div class="field">
+          <label for="cron-desc">Descrição (a partir de Investimentos)</label>
+          <select id="cron-desc" required>
+            <option value="" selected>— Selecionar de Investimentos —</option>
+          </select>
+        </div>
+        <div class="field"><label for="cron-parcela">Parcela</label><input id="cron-parcela" type="number" min="1" step="1" value="1"></div>
+        <div class="field"><label for="cron-lib">Liberação (%)</label><input id="cron-lib" type="text" value="100,00%"></div>
+        <div class="field"><label for="cron-tri">Trim.</label><select id="cron-tri"><option value="1">1º</option><option value="2">2º</option><option value="3" selected>3º</option><option value="4">4º</option></select></div>
+        <div class="field"><label for="cron-ano">Ano</label><input id="cron-ano" type="number" min="2000" step="1"></div>
+      </div>
+      <div class="actions">
+        <button class="btn" type="submit" id="cron-btnSalvar">Atualizar</button>
+        <button class="btn outline" type="button" id="cron-btnCancelar">Cancelar</button>
+        <button class="btn danger" type="button" id="cron-btnApagarTudo">Apagar tudo</button>
+      </div>
+      <input type="hidden" id="cron-editIndex" value="-1">
+    </form>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <h2 class="title" style="font-size:18px;margin:0">Lançamentos do cronograma</h2>
+        <span class="badge" id="cron-badgeCount">0 itens</span>
+      </div>
+      <div class="table-wrap">
+        <table id="cron-tabela">
+          <thead><tr><th>Descrição</th><th>Parcela</th><th>%</th><th>Trimestre</th><th>Ano</th><th style="width:130px">Ações</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- 6) RECEITAS                                            -->
+  <!-- ======================================================= -->
+  <section class="section" id="sec-receitas">
+    <h1 class="title">Receitas – média anual</h1>
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Discriminação</th><th>Média anual</th></tr></thead>
+          <tbody>
+            <tr><td>Agricultura (soma do Valor Total)</td><td id="rec-agr">R$ 0,00</td></tr>
+            <tr><td>Pecuária (soma do Valor Total)</td><td id="rec-pec">R$ 0,00</td></tr>
+            <tr><td><strong>Total</strong></td><td id="rec-total"><strong>R$ 0,00</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- 7) DESPESAS                                            -->
+  <!-- ======================================================= -->
+  <section class="section" id="sec-despesas">
+    <h1 class="title">Despesas – média anual</h1>
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Discriminação</th><th>Média anual</th></tr></thead>
+          <tbody>
+            <tr><td>Agricultura (soma do Valor Total)</td><td id="des-agr">R$ 0,00</td></tr>
+            <tr><td>Pecuária (soma do Valor Total)</td><td id="des-pec">R$ 0,00</td></tr>
+            <tr><td><strong>Total</strong></td><td id="des-total"><strong>R$ 0,00</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- 8) FLUXO DE CAIXA                                      -->
+  <!-- ======================================================= -->
+  <section class="section" id="sec-fluxo">
+    <h1 class="title">Fluxo de Caixa (1 a 25)</h1>
+
+    <!-- Parâmetros do fluxo -->
+    <div class="card" id="fluxo-params-card">
+      <div class="flow-legend">Parâmetros do fluxo</div>
+      <form id="fluxo-params">
+        <div class="grid-flow">
+          <!-- Linha PNCF -->
+          <div class="field">
+            <label for="fp-total-pncf">TOTAL DO FINANCIAMENTO DO PNCF</label>
+            <input id="fp-total-pncf" type="text" value="R$ 0,00">
+          </div>
+          <div class="field">
+            <label for="fp-juros-pncf">JUROS PNCF</label>
+            <input id="fp-juros-pncf" type="text" value="0,50%">
+          </div>
+          <div class="field">
+            <label for="fp-rebate-pncf">REBATE (%)</label>
+            <input id="fp-rebate-pncf" type="text" value="40%">
+          </div>
+
+          <!-- Linha PRONAF -->
+          <div class="field">
+            <label for="fp-total-pronaf">TOTAL DO FINANCIAMENTO DO PRONAF</label>
+            <input id="fp-total-pronaf" type="text" value="R$ 0,00">
+          </div>
+          <div class="field">
+            <label for="fp-juros-pronaf">JUROS PRONAF</label>
+            <input id="fp-juros-pronaf" type="text" value="0,50%">
+          </div>
+          <div class="field">
+            <label for="fp-rebate-pronaf">REBATE (%)</label>
+            <input id="fp-rebate-pronaf" type="text" value="40%">
+          </div>
+
+          <!-- Carência -->
+          <div class="field">
+            <label for="fp-carencia">CARÊNCIA (ANOS)</label>
+            <input id="fp-carencia" type="number" min="0" step="1" value="3">
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table id="fluxo-tabela">
+          <thead>
+            <tr id="fluxo-head-row">
+              <th>DESCRIÇÃO</th>
+              <!-- colunas 1..25 via JS -->
+            </tr>
+          </thead>
+          <tbody id="fluxo-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <!-- 8) FLUXO DE CAIXA -->
+  </section>  <!-- fecha #sec-fluxo -->
+
+  
+  </section>
+<br>
+</div>   <!-- fecha .container -->
+
+<!-- seus <script> ficam aqui, abaixo -->
+<script>
+  /* JS dos anexos (pode ficar no seu último <script>) */
+  (function(){
+    document.querySelectorAll('button[data-target]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const $f = document.getElementById(btn.dataset.target);
+        if ($f) $f.click();
+      });
+    });
+    const pairs = [
+      ['ax-art-file','ax-art-text'],
+      ['ax-plantas-file','ax-plantas-text'],
+      ['ax-docs-file','ax-docs-text']
+    ];
+    pairs.forEach(([f,t])=>{
+      const $f=document.getElementById(f), $t=document.getElementById(t);
+      if($f&&$t){ $f.addEventListener('change', ()=>{ $t.value=$f.files?.[0]?.name||''; }); }
+    });
+  })();
+</script>
+
+<script>
+(function(){
+  const read = (k, d) => {
+    try { const v = JSON.parse(localStorage.getItem(k) || ''); return v ?? d; }
+    catch(_) { return d; }
+  };
+
+  const $btn = document.getElementById('btnRelatorio');
+  if(!$btn) return;
+
+  $btn.addEventListener('click', () => {
+    const snapshot = {
+      at: new Date().toISOString(),
+      invest: read('investimentos.rows.v1', []),
+      agric:  read('agricola.rows.v1', []),
+      pec:    read('pecuaria.rows.v2', []),
+      cron:   read('cronograma.rows.v1', []),
+      fluxo:  read('fluxo.params.v1', {}),
+      forr:   read('forr.params.v1', {})  // se não existir, fica {}
+    };
+    localStorage.setItem('report.snapshot.v1', JSON.stringify(snapshot));
+    window.open('relatorio.html', '_blank');
+  });
+})();
+</script>
+
+</body>
+</html>
+
+</div>
+
+<script>
+/* ===== util ===== */
+const fmtBRL = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+const fmtNum2 = new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const el = id => document.getElementById(id);
+const toBRL = n => fmtBRL.format(Number(n||0));
+const toDec = (n,p=2)=>Number(Number(n||0).toFixed(p));
+const parseBRL = s => { if(!s) return 0; const c=String(s).replace(/[^\d,.-]/g,'').replace(/\./g,'').replace(',','.'); const n=parseFloat(c); return isNaN(n)?0:n; };
+const parsePercent = s => { if(!s) return 0; const c=String(s).replace('%','').replace(/\./g,'').replace(',','.'); const n=parseFloat(c); return isNaN(n)?0:n; };
+const toPercent = n => `${fmtNum2.format(Number(n||0))}%`;
+const pctToText = v => `${fmtNum2.format(Number(v||0))}%`;
+function broadcast(topic){ document.dispatchEvent(new CustomEvent('data-changed',{detail:{topic}})); }
+function readBRLFrom(elId){ return toDec(parseBRL(document.getElementById(elId).textContent)); }
+
+/* ---------------------- INVESTIMENTOS ---------------------- */
+(function(){
+  const LS='investimentos.rows.v1'; let rows=[];
+  const $qtd=el('invest-quantidade'),$vu=el('invest-valorUnitario'),$vt=el('invest-valorTotal');
+  function calc(){ $vt.value = toBRL(toDec((toDec($qtd.value.replace(',','.'))||0)*parseBRL($vu.value))); }
+  $qtd.addEventListener('input',calc); $vu.addEventListener('input',calc);
+  $vu.addEventListener('blur',()=>{$vu.value=toBRL(parseBRL($vu.value));calc();});
+
+  function render(){
+    const $tb=document.querySelector('#invest-tabela tbody'); $tb.innerHTML=''; let soma=0;
+    rows.forEach((r,i)=>{ soma+=r.valorTotal; const tr=document.createElement('tr'); tr.innerHTML=`
+      <td>${r.descricao}</td><td>${r.categoria}</td><td>${r.item}</td><td>${r.unidade}</td>
+      <td>${fmtNum2.format(r.quantidade)}</td><td>${toBRL(r.valorUnitario)}</td><td>${toBRL(r.valorTotal)}</td>
+      <td>${r.atividade}</td><td>${r.fonte}</td>
+      <td><div class="table-actions">
+  <button class="btn outline btn-icon" data-i-e="${i}" title="Editar">
+    <span class="material-icons" aria-hidden="true">edit</span>
+    <span class="sr-only">Editar</span>
+  </button>
+  <button class="btn danger btn-icon" data-i-d="${i}" title="Excluir">
+    <span class="material-icons" aria-hidden="true">delete</span>
+    <span class="sr-only">Excluir</span>
+  </button>
+</div></td>
+`; $tb.appendChild(tr);});
+    el('invest-badgeCount').textContent=`${rows.length} ${rows.length===1?'item':'itens'}`;
+    el('invest-totalGeral').textContent=toBRL(soma);
+// ---- somatórios por fonte (cards) ----
+const sSIB  = rows.reduce((t,r)=> t + (r.fonte === 'SIB' ? (r.valorTotal||0) : 0), 0);
+const sPRON = rows.reduce((t,r)=> t + (r.fonte === 'PRONAF' ? (r.valorTotal||0) : 0), 0);
+const sRP   = rows.reduce((t,r)=> t + (r.fonte === 'RECURSOS PRÓPRIOS' ? (r.valorTotal||0) : 0), 0);
+const put = (id,val)=>{ const x=document.getElementById(id); if(x) x.textContent = toBRL(val); };
+put('invest-sum-sib', sSIB);
+put('invest-sum-pronaf', sPRON);   // mostrado como "PRONAF A Total (R$)"
+put('invest-sum-rp', sRP);
+
+// --- Sincroniza “TOTAL DO FINANCIAMENTO DO PRONAF” com o cartão PRONAF ---
+(function syncFluxoPronaf(totalPronaf, totalSIB){
+  const KEY = 'fluxo.params.v1';
+
+  // atualiza o input visível
+  const $pron = document.getElementById('fp-total-pronaf');
+  if ($pron) $pron.value = toBRL(totalPronaf);
+
+  // atualiza o localStorage usado pelo módulo do Fluxo
+  let p = {};
+  try { p = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(_){}
+  p.tpron = toDec(totalPronaf);
+  p.tpncf = toDec(totalSIB);   // remova esta linha se NÃO quiser atrelar PNCF ao SIB
+  localStorage.setItem(KEY, JSON.stringify(p));
+
+  // avisa o Fluxo para recalcular
+  document.dispatchEvent(new CustomEvent('fluxo-params-changed'));
+})(sPRON, sSIB);
+
+    localStorage.setItem(LS,JSON.stringify(rows));
+    broadcast('invest');
+  }
+  function getForm(){return{
+    descricao:el('invest-descricao').value,
+    categoria:el('invest-categoria').value, item:el('invest-item').value, unidade:el('invest-unidade').value,
+    atividade:el('invest-atividade').value, quantidade:toDec(el('invest-quantidade').value.replace(',','.')),
+    valorUnitario:toDec(parseBRL(el('invest-valorUnitario').value)), valorTotal:toDec(parseBRL(el('invest-valorTotal').value)),
+    fonte:el('invest-fonte').value
+  }}
+  function setForm(r){
+    el('invest-descricao').value=r.descricao; el('invest-categoria').value=r.categoria; el('invest-item').value=r.item;
+    el('invest-unidade').value=r.unidade; el('invest-atividade').value=r.atividade; el('invest-quantidade').value=r.quantidade;
+    el('invest-valorUnitario').value=toBRL(r.valorUnitario); el('invest-valorTotal').value=toBRL(r.valorTotal); el('invest-fonte').value=r.fonte;
+  }
+  document.getElementById('invest-form').addEventListener('submit',e=>{
+    e.preventDefault(); const obj=getForm(); const idx=parseInt(el('invest-editIndex').value,10);
+    if(idx>=0) rows[idx]=obj; else rows.push(obj); render();
+    e.target.reset(); el('invest-editIndex').value=-1; el('invest-btnSalvar').textContent='Adicionar à tabela'; $vt.value=toBRL(0);
+  });
+  document.addEventListener('click',e=>{
+    const d=e.target.closest('[data-i-d]'); const ed=e.target.closest('[data-i-e]');
+    if(d){ rows.splice(Number(d.getAttribute('data-i-d')),1); render(); }
+    if(ed){ const i=Number(ed.getAttribute('data-i-e')); setForm(rows[i]); el('invest-editIndex').value=i; el('invest-btnSalvar').textContent='Salvar alteração'; window.scrollTo({top:0,behavior:'smooth'}); }
+  });
+  el('invest-btnLimpar').addEventListener('click',()=>{ document.getElementById('invest-form').reset(); el('invest-editIndex').value=-1; el('invest-btnSalvar').textContent='Adicionar à tabela'; $vt.value=toBRL(0);});
+  el('invest-btnExportar').addEventListener('click',()=>{
+    const headers=['Descrição','Categoria','Item','Unidade','Quantidade','Valor Unitário (R$)','Valor Total (R$)','Atividade','Fonte'];
+    const lines=rows.map(r=>[r.descricao,r.categoria,r.item,r.unidade,String(r.quantidade).replace('.',','),toBRL(r.valorUnitario),toBRL(r.valorTotal),r.atividade,r.fonte]);
+    const csv=[headers,...lines].map(a=>a.map(s=>`"${String(s).replaceAll('"','""')}"`).join(';')).join('\r\n');
+    const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}); const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='investimentos.csv'; a.click(); URL.revokeObjectURL(url);
+  });
+  el('invest-btnApagarTudo').addEventListener('click',()=>{ if(confirm('Apagar todos os investimentos?')){ rows=[]; render(); }});
+  try{ rows=JSON.parse(localStorage.getItem(LS)||'[]'); if(!Array.isArray(rows)) rows=[];}catch(_){rows=[]}
+  render(); calc();
+})();
+
+/* ---------------------- AGRÍCOLA --------------------------- */
+(function(){
+  const LS='agricola.rows.v1'; let rows=[];
+  const $area=el('agr-areaHa'),$uaha=el('agr-uaha'),$vUnit=el('agr-valorUnit'),$prod=el('agr-produtividade');
+  const $vTotal=el('agr-valorTotal'),$rec=el('agr-receitaAnual'),$pct=el('agr-custoPadrao'),$supp=el('agr-suporte');
+
+  function calcReceita4(){
+    const val=(toDec($area.value.replace(',','.'))||0)*(parseBRL($vUnit.value)||0)*(toDec($prod.value.replace(',','.'))||0);
+    $rec.value=toBRL(toDec(val));
+  }
+  function calcSuporte(){ const ua=(toDec($area.value.replace(',','.'))||0)*(toDec($uaha.value.replace(',','.'))||0); $supp.value=fmtNum2.format(toDec(ua)); }
+  function calcValorTotal(){
+    const receita = parseBRL($rec.value);
+    const p = parsePercent($pct.value);
+    const vt = toDec(receita * (isNaN(p)?0:(p/100)));
+    $vTotal.value = toBRL(vt);
+  }
+  function recalc(){ calcReceita4(); calcSuporte(); calcValorTotal(); }
+
+  [$area,$uaha,$vUnit,$prod].forEach(i=> i.addEventListener('input', recalc));
+  $vUnit.addEventListener('blur',()=>{ $vUnit.value=toBRL(parseBRL($vUnit.value)); recalc(); });
+  $pct.addEventListener('input', calcValorTotal);
+  $pct.addEventListener('blur',()=>{ const p=parsePercent($pct.value); if(!isNaN(p) && p>=0 && p<=100) $pct.value=toPercent(p); calcValorTotal(); });
+
+  function getForm(){
+    return {
+      desc:el('agr-descCultura').value.trim(), nivel:el('agr-nivelTec').value, esp:el('agr-espacamento').value.trim(),
+      expl:el('agr-exploracao').value, tipo:el('agr-tipoCultura').value,
+      uaha:el('agr-uaha').value.trim()===''?null:toDec(el('agr-uaha').value.replace(',','.')), cons:el('agr-consorciada').value,
+      solo:el('agr-solo').value, ciclo:el('agr-ciclo').value, risco:el('agr-risco').value, irr:el('agr-irrigacao').value,
+      pIni:el('agr-plantioIni').value, pFim:el('agr-plantioFim').value, cIni:el('agr-colheitaIni').value, cFim:el('agr-colheitaFim').value,
+      area:toDec(el('agr-areaHa').value.replace(',','.')), unid:el('agr-unidade').value, vUnit:toDec(parseBRL(el('agr-valorUnit').value)),
+      prod:toDec(el('agr-produtividade').value.replace(',','.')), rec:toDec(parseBRL(el('agr-receitaAnual').value)),
+      pct:el('agr-custoPadrao').value.trim()===''?null:toDec(parsePercent(el('agr-custoPadrao').value)),
+      vTotal:toDec(parseBRL(el('agr-valorTotal').value)), supp:toDec((toDec(el('agr-areaHa').value.replace(',','.'))||0)*(toDec(el('agr-uaha').value.replace(',','.'))||0))
+    }
+  }
+  function setForm(r){
+    el('agr-descCultura').value=r.desc||''; el('agr-nivelTec').value=r.nivel; el('agr-espacamento').value=r.esp||''; el('agr-exploracao').value=r.expl; el('agr-tipoCultura').value=r.tipo;
+    el('agr-uaha').value=r.uaha??''; el('agr-consorciada').value=r.cons; el('agr-solo').value=r.solo; el('agr-ciclo').value=r.ciclo; el('agr-risco').value=r.risco; el('agr-irrigacao').value=r.irr;
+    el('agr-plantioIni').value=r.pIni||''; el('agr-plantioFim').value=r.pFim||''; el('agr-colheitaIni').value=r.cIni||''; el('agr-colheitaFim').value=r.cFim||'';
+    el('agr-areaHa').value=r.area; el('agr-unidade').value=r.unid; el('agr-valorUnit').value=toBRL(r.vUnit); el('agr-produtividade').value=r.prod;
+    el('agr-receitaAnual').value=toBRL(r.rec); el('agr-custoPadrao').value=r.pct==null?'':toPercent(r.pct); el('agr-valorTotal').value=toBRL(r.vTotal);
+    el('agr-suporte').value=fmtNum2.format(r.supp||0);
+  }
+
+  function render(){
+    const $tb=document.querySelector('#agr-tabela tbody'); $tb.innerHTML=''; let soma=0;
+    rows.forEach((r,i)=>{ soma+=r.vTotal||0; const tr=document.createElement('tr'); tr.innerHTML=`
+      <td>${r.desc||''}</td><td>${r.nivel}</td><td>${r.esp||''}</td><td>${r.expl}</td><td>${r.tipo}</td>
+      <td>${r.uaha==null?'':fmtNum2.format(r.uaha)}</td><td>${r.cons}</td>
+      <td>${r.solo}</td><td>${r.ciclo}</td><td>${r.risco}</td><td>${r.irr}</td>
+      <td>${r.pIni||''}${(r.pIni||r.pFim)?' – ':''}${r.pFim||''}</td>
+      <td>${r.cIni||''}${(r.cIni||r.cFim)?' – ':''}${r.cFim||''}</td>
+      <td>${fmtNum2.format(r.area)}</td><td>${r.unid}</td><td>${toBRL(r.vUnit)}</td><td>${fmtNum2.format(r.prod)}</td>
+      <td>${toBRL(r.rec)}</td><td>${r.pct==null?'':toPercent(r.pct)}</td><td>${toBRL(r.vTotal)}</td>
+      <td>${fmtNum2.format(r.supp||0)}</td>
+      <td><div class="table-actions">
+  <button class="btn outline btn-icon" data-a-e="${i}" title="Editar">
+    <span class="material-icons" aria-hidden="true">edit</span>
+    <span class="sr-only">Editar</span>
+  </button>
+  <button class="btn danger btn-icon" data-a-d="${i}" title="Excluir">
+    <span class="material-icons" aria-hidden="true">delete</span>
+    <span class="sr-only">Excluir</span>
+  </button>
+</div></td>
+
+`; $tb.appendChild(tr);});
+    el('agr-badgeCount').textContent=`${rows.length} ${rows.length===1?'item':'itens'}`;
+    el('agr-totalGeral').textContent=toBRL(soma);
+    localStorage.setItem(LS,JSON.stringify(rows));
+    broadcast('agricola');
+  }
+
+  function clearForm(){ document.getElementById('agr-form').reset();
+    el('agr-editIndex').value=-1; el('agr-btnSalvar').textContent='Adicionar à tabela';
+    el('agr-valorTotal').value=toBRL(0); el('agr-receitaAnual').value=toBRL(0); el('agr-suporte').value=fmtNum2.format(0);
+  }
+
+  document.getElementById('agr-form').addEventListener('submit',e=>{
+    e.preventDefault(); const obj=getForm(); const idx=parseInt(el('agr-editIndex').value,10);
+    if(idx>=0) rows[idx]=obj; else rows.push(obj); render(); clearForm();
+  });
+  document.addEventListener('click',e=>{
+    const d=e.target.closest('[data-a-d]'); const ed=e.target.closest('[data-a-e]');
+    if(d){ rows.splice(Number(d.getAttribute('data-a-d')),1); render(); }
+    if(ed){ const i=Number(ed.getAttribute('data-a-e')); setForm(rows[i]); el('agr-editIndex').value=i; el('agr-btnSalvar').textContent='Salvar alteração'; window.scrollTo({top:0,behavior:'smooth'}); }
+  });
+  el('agr-btnLimpar').addEventListener('click',clearForm);
+  el('agr-btnExportar').addEventListener('click',()=>{
+    const headers=['Descrição','Nível Tec.','Espaçamento','Exploração','Tipo','UA/ha','Consorciada','Solo','Ciclo','Risco','Irrigação','Plantio Início','Plantio Fim','Colheita Início','Colheita Fim','Área (ha)','Unidade','Valor Unitário (R$)','Produtividade (ha)','Receita 4º ano (R$)','Custo padrão (%)','Valor Total (R$)','Suporte Forrageiro (UA)'];
+    const lines=rows.map(r=>[r.desc||'',r.nivel,r.esp||'',r.expl,r.tipo,r.uaha==null?'':String(r.uaha).replace('.',','),r.cons,r.solo,r.ciclo,r.risco,r.irr,r.pIni||'',r.pFim||'',r.cIni||'',r.cFim||'',String(r.area).replace('.',','),r.unid,toBRL(r.vUnit),String(r.prod).replace('.',','),toBRL(r.rec),r.pct==null?'':`${String(r.pct).replace('.',',')}%`,toBRL(r.vTotal),String(r.supp||0).replace('.',',')]);
+    const csv=[headers,...lines].map(a=>a.map(s=>`"${String(s).replaceAll('"','""')}"`).join(';')).join('\r\n');
+    const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}); const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='atividades-agricolas.csv'; a.click(); URL.revokeObjectURL(url);
+  });
+
+  try{ rows=JSON.parse(localStorage.getItem(LS)||'[]'); if(!Array.isArray(rows)) rows=[];}catch(_){rows=[]}
+  render(); recalc();
+})();
+
+/* ---------------------- PECUÁRIA --------------------------- */
+(function(){
+  const LS='pecuaria.rows.v2'; let rows=[];
+  const $qtd=el('pec-quantidade'),$vu=el('pec-valorUnit'),$pct=el('pec-custoPadrao'),$rec=el('pec-receita'),$vt=el('pec-valorTotal');
+
+  function calcReceita(){ const receita = (toDec($qtd.value.replace(',','.'))||0) * (parseBRL($vu.value)||0); $rec.value = toBRL(toDec(receita)); }
+  function calcValorTotal(){ const receita = parseBRL($rec.value); const p = parsePercent($pct.value); const vt = toDec(receita * (isNaN(p)?0:(p/100))); $vt.value = toBRL(vt); }
+  function recalc(){ calcReceita(); calcValorTotal(); }
+  [$qtd,$vu].forEach(i=> i.addEventListener('input', recalc));
+  $vu.addEventListener('blur',()=>{ $vu.value=toBRL(parseBRL($vu.value)); recalc(); });
+  $pct.addEventListener('input', calcValorTotal);
+  $pct.addEventListener('blur',()=>{ const p=parsePercent($pct.value); if(!isNaN(p) && p>=0 && p<=100) $pct.value=toPercent(p); calcValorTotal(); });
+
+  function render(){
+    const $tb=document.querySelector('#pec-tabela tbody'); $tb.innerHTML=''; let soma=0;
+    rows.forEach((r,i)=>{ soma+=(r.vTotal||0); const tr=document.createElement('tr'); tr.innerHTML=`
+      <td>${r.desc}</td><td>${r.eco}</td><td>${fmtNum2.format(r.qtd)}</td><td>${r.unid}</td>
+      <td>${toBRL(r.vUnit)}</td><td>${r.pct==null?'':toPercent(r.pct)}</td><td>${toBRL(r.rec)}</td><td>${toBRL(r.vTotal)}</td>
+      <td><div class="table-actions">
+  <button class="btn outline btn-icon" data-p-e="${i}" title="Editar">
+    <span class="material-icons" aria-hidden="true">edit</span>
+    <span class="sr-only">Editar</span>
+  </button>
+  <button class="btn danger btn-icon" data-p-d="${i}" title="Excluir">
+    <span class="material-icons" aria-hidden="true">delete</span>
+    <span class="sr-only">Excluir</span>
+  </button>
+</div></td>
+
+`; $tb.appendChild(tr);});
+    el('pec-badgeCount').textContent=`${rows.length} ${rows.length===1?'item':'itens'}`;
+    el('pec-totalGeral').textContent=toBRL(soma);
+    localStorage.setItem(LS,JSON.stringify(rows));
+    broadcast('pecuaria');
+  }
+  function getForm(){return{
+    desc:el('pec-desc').value.trim(), eco:el('pec-eco').value, qtd:toDec(el('pec-quantidade').value.replace(',','.')), unid:el('pec-unidade').value,
+    vUnit:toDec(parseBRL(el('pec-valorUnit').value)), pct:el('pec-custoPadrao').value.trim()===''?null:toDec(parsePercent(el('pec-custoPadrao').value)),
+    rec:toDec(parseBRL(el('pec-receita').value)), vTotal:toDec(parseBRL(el('pec-valorTotal').value))
+  }}
+  function setForm(r){
+    el('pec-desc').value=r.desc; el('pec-eco').value=r.eco; el('pec-quantidade').value=r.qtd; el('pec-unidade').value=r.unid;
+    el('pec-valorUnit').value=toBRL(r.vUnit); el('pec-custoPadrao').value=r.pct==null?'':toPercent(r.pct);
+    el('pec-receita').value=toBRL(r.rec||0); el('pec-valorTotal').value=toBRL(r.vTotal||0);
+  }
+
+  document.getElementById('pec-form').addEventListener('submit',e=>{
+    e.preventDefault(); const obj=getForm(); const idx=parseInt(el('pec-editIndex').value,10);
+    if(idx>=0) rows[idx]=obj; else rows.push(obj); render();
+    e.target.reset(); el('pec-editIndex').value=-1; el('pec-btnSalvar').textContent='Adicionar à tabela';
+    el('pec-receita').value=toBRL(0); el('pec-valorTotal').value=toBRL(0);
+  });
+  document.addEventListener('click',e=>{
+    const d=e.target.closest('[data-p-d]'); const ed=e.target.closest('[data-p-e]');
+    if(d){ rows.splice(Number(d.getAttribute('data-p-d')),1); render(); }
+    if(ed){ const i=Number(ed.getAttribute('data-p-e')); setForm(rows[i]); el('pec-editIndex').value=i; el('pec-btnSalvar').textContent='Salvar alteração'; window.scrollTo({top:0,behavior:'smooth'}); }
+  });
+  el('pec-btnLimpar').addEventListener('click',()=>{ document.getElementById('pec-form').reset(); el('pec-editIndex').value=-1; el('pec-btnSalvar').textContent='Adicionar à tabela'; el('pec-receita').value=toBRL(0); el('pec-valorTotal').value=toBRL(0); });
+  el('pec-btnExportar').addEventListener('click',()=>{
+    const headers=['Descrição','Atividade Econômica','Quantidade','Unidade','Valor Unitário (R$)','Custo padrão (%)','Receita Anual (R$)','Valor Total (R$)'];
+    const lines=rows.map(r=>[r.desc,r.eco,String(r.qtd).replace('.',','),r.unid,toBRL(r.vUnit),r.pct==null?'':`${String(r.pct).replace('.',',')}%`,toBRL(r.rec),toBRL(r.vTotal)]);
+    const csv=[headers,...lines].map(a=>a.map(s=>`"${String(s).replaceAll('"','""')}"`).join(';')).join('\r\n');
+    const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}); const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='atividade-pecuaria.csv'; a.click(); URL.revokeObjectURL(url);
+  });
+
+  try{ rows=JSON.parse(localStorage.getItem(LS)||'[]'); if(!Array.isArray(rows)) rows=[];}catch(_){rows=[]}
+  render(); recalc();
+})();
+
+
+/* ---------------------- FORRAGEIRO (auto) ----------------- */
+(function(){
+  const LS_AGR='agricola.rows.v1';
+
+  // Inputs
+  const $pres   = el('forr-preserv');
+  const $benf   = el('forr-benf');
+  const $outros = el('forr-outros');   // <-- novo
+  const $necIn  = el('forr-necess');
+
+  // Células (tabela “Uso projetado das terras”)
+  const $areaAgr   = el('forr-area-agr');
+  const $uaAgr     = el('forr-ua-agr');
+  const $areaPec   = el('forr-area-pec');
+  const $uaPec     = el('forr-ua-pec');
+  const $areaPres  = el('forr-area-pres');
+  const $areaBenf  = el('forr-area-benf');
+  const $areaOutros= el('forr-area-outros'); // <-- novo
+  const $areaTot   = el('forr-area-total');
+  const $uaTot     = el('forr-ua-total');
+
+  // Células (tabela “Estudo do Suporte Forrageiro”)
+  const $prev = el('forr-prev');
+  const $necOut = el('forr-nec');
+  const $res  = el('forr-res');
+  const $sit  = el('forr-sit');
+
+  const f2 = n => fmtNum2.format(Number(Number(n||0).toFixed(2)));
+
+  function readAgr(){
+    try{
+      const d = JSON.parse(localStorage.getItem(LS_AGR)||'[]');
+      return Array.isArray(d) ? d : [];
+    }catch(_){ return []; }
+  }
+
+  function calc(){
+    const agr = readAgr();
+
+    // Somatórios vindos das atividades (já salvos pelo seu módulo Agrícola)
+    const areaAgr = agr
+      .filter(r => String(r.expl||'').toUpperCase()==='AGRÍCOLA')
+      .reduce((s,r)=> s + (Number(r.area)||0), 0);
+    const uaAgr = agr
+      .filter(r => String(r.expl||'').toUpperCase()==='AGRÍCOLA')
+      .reduce((s,r)=> s + (Number(r.supp)||0), 0);
+
+    const areaPec = agr
+      .filter(r => String(r.expl||'').toUpperCase()==='PECUÁRIA')
+      .reduce((s,r)=> s + (Number(r.area)||0), 0);
+    const uaPecu = agr
+      .filter(r => String(r.expl||'').toUpperCase()==='PECUÁRIA')
+      .reduce((s,r)=> s + (Number(r.supp)||0), 0);
+
+    // Entradas manuais desta seção
+    const areaPres  = Number($pres?.value)||0;
+    const benf      = Number($benf?.value)||0;
+    const outros    = Number($outros?.value)||0;   // <-- novo
+    const necessidade = Number($necIn?.value)||0;
+
+    // Totais
+    const areaTotal = areaAgr + areaPec + areaPres + benf + outros; // <-- soma “outras áreas”
+    const uaTotal   = uaAgr + uaPecu; // Outras, Preservação e Benfeitorias não geram UA
+
+    // Preenche tabela “Uso projetado das terras”
+    if($areaAgr)    $areaAgr.textContent    = f2(areaAgr);
+    if($uaAgr)      $uaAgr.textContent      = f2(uaAgr);
+    if($areaPec)    $areaPec.textContent    = f2(areaPec);
+    if($uaPec)      $uaPec.textContent      = f2(uaPecu);
+    if($areaPres)   $areaPres.textContent   = f2(areaPres);
+    if($areaBenf)   $areaBenf.textContent   = f2(benf);
+    if($areaOutros) $areaOutros.textContent = f2(outros); // <-- novo
+    if($areaTot)    $areaTot.innerHTML      = `<strong>${f2(areaTotal)}</strong>`;
+    if($uaTot)      $uaTot.innerHTML        = `<strong>${f2(uaTotal)}</strong>`;
+
+    // Estudo do suporte forrageiro
+    const resultado = uaTotal - necessidade;
+    if($prev)   $prev.textContent   = f2(uaTotal);
+    if($necOut) $necOut.textContent = f2(necessidade);
+    if($res)    $res.textContent    = f2(resultado);
+    if($sit)    $sit.textContent    = (resultado>=0 ? 'SUFICIENTE' : 'INSUFICIENTE');
+  }
+
+  // Recalcular ao digitar
+  [$pres,$benf,$outros,$necIn].forEach(i => i && i.addEventListener('input', calc));
+
+  // Recalcular quando as atividades mudarem
+  document.addEventListener('data-changed', ev=>{
+    if (ev?.detail?.topic === 'agricola') calc();
+  });
+
+  // Inicial
+  calc();
+})();
+
+
+/* ---------- Parâmetros do Fluxo (LS + formatação) ---------- */
+(function(){
+  const LS = 'fluxo.params.v1';
+  const idsMoney = ['fp-total-pncf','fp-total-pronaf'];
+  const idsPct   = ['fp-juros-pncf','fp-rebate-pncf','fp-juros-pronaf','fp-rebate-pronaf'];
+  const $carencia = el('fp-carencia');
+
+  function load(){
+    let p={}; try{ p=JSON.parse(localStorage.getItem(LS)||'{}'); }catch(_){}
+    if(p.tpncf!=null) el('fp-total-pncf').value = toBRL(p.tpncf);
+    if(p.tpron!=null) el('fp-total-pronaf').value = toBRL(p.tpron);
+    if(p.jpncf!=null) el('fp-juros-pncf').value = pctToText(p.jpncf);
+    if(p.rpncf!=null) el('fp-rebate-pncf').value = pctToText(p.rpncf);
+    if(p.jpron!=null) el('fp-juros-pronaf').value = pctToText(p.jpron);
+    if(p.rpron!=null) el('fp-rebate-pronaf').value = pctToText(p.rpron);
+    if(p.car!=null)   $carencia.value = p.car;
+  }
+  function save(){
+    const p={
+      tpncf: parseBRL(el('fp-total-pncf').value),
+      tpron: parseBRL(el('fp-total-pronaf').value),
+      jpncf: parsePercent(el('fp-juros-pncf').value),
+      rpncf: parsePercent(el('fp-rebate-pncf').value),
+      jpron: parsePercent(el('fp-juros-pronaf').value),
+      rpron: parsePercent(el('fp-rebate-pronaf').value),
+      car:   parseInt($carencia.value||'0',10)
+    };
+    localStorage.setItem(LS, JSON.stringify(p));
+    document.dispatchEvent(new CustomEvent('fluxo-params-changed'));
+  }
+
+  idsMoney.forEach(id=>{
+    const i=el(id);
+    i.addEventListener('blur', ()=>{ i.value = toBRL(parseBRL(i.value)); save(); });
+  });
+  idsPct.forEach(id=>{
+    const i=el(id);
+    i.addEventListener('blur', ()=>{ i.value = pctToText(parsePercent(i.value)); save(); });
+  });
+  $carencia.addEventListener('input', save);
+
+  load(); save();
+})();
+
+/* ---------------------- CRONOGRAMA (select only) ---------- */
+(function(){
+  const LS='cronograma.rows.v1', LS_INV='investimentos.rows.v1';
+
+  const read=()=>{ try{const d=JSON.parse(localStorage.getItem(LS)||'[]'); return Array.isArray(d)?d:[];}catch(_){return [];} };
+  const write=rows=>localStorage.setItem(LS,JSON.stringify(rows));
+
+  // Lê investimentos do LS
+  function getInvestimentos(){
+    try{
+      const inv = JSON.parse(localStorage.getItem(LS_INV)||'[]');
+      return Array.isArray(inv) ? inv : [];
+    }catch(_){ return []; }
+  }
+
+  // Normaliza descrição: usa r.descricao, colapsa espaços/tabs e deduplica
+  function uniqueDescricoes(arr){
+    const seen = new Set();
+    const out = [];
+    for (const r of arr){
+      const raw = (r && r.descricao) ? String(r.descricao) : '';
+      const d = raw.replace(/\s+/g,' ').trim();
+      if (!d) continue;
+      if (!seen.has(d)){ seen.add(d); out.push(d); }
+    }
+    return out;
+  }
+
+  function fillSelect(){
+    const s = el('cron-desc');
+    if(!s) return;
+
+    const prev = s.value; // tenta preservar seleção
+    s.innerHTML = '<option value="" selected>— Selecionar de Investimentos —</option>';
+
+    const descricoes = uniqueDescricoes(getInvestimentos());
+    for (const d of descricoes){
+      const o = document.createElement('option');
+      o.value = d;
+      o.textContent = d;
+      s.appendChild(o);
+    }
+
+    if (prev && Array.from(s.options).some(op => op.value === prev)) {
+      s.value = prev;
+    }
+  }
+
+  function render(){
+    const rows=read();
+    const tb=document.querySelector('#cron-tabela tbody');
+    if(!tb) return;
+    tb.innerHTML='';
+    el('cron-badgeCount').textContent=`${rows.length} ${rows.length===1?'item':'itens'}`;
+    rows.forEach((r,i)=>{
+      const tr=document.createElement('tr');
+      tr.innerHTML =
+        `<td>${r.desc}</td><td>${r.parcela}</td><td>${fmtNum2.format(r.pct)}%</td><td>${r.tri}º</td><td>${r.ano}</td>
+         <td><div class="table-actions">
+  <button class="btn outline btn-icon" data-c-e="${i}" title="Editar">
+    <span class="material-icons" aria-hidden="true">edit</span>
+    <span class="sr-only">Editar</span>
+  </button>
+  <button class="btn danger btn-icon" data-c-d="${i}" title="Excluir">
+    <span class="material-icons" aria-hidden="true">delete</span>
+    <span class="sr-only">Excluir</span>
+  </button>
+</div></td>
+`;
+      tb.appendChild(tr);
+    });
+  }
+
+  // Inicialização
+  fillSelect();
+  el('cron-ano').value = new Date().getFullYear();
+  render();
+
+  // Atualiza quando Investimentos mudar (evento já emitido pelo seu módulo)
+  document.addEventListener('data-changed', ev=>{
+    if (ev?.detail?.topic === 'invest') fillSelect();
+  });
+
+  // Atualiza ao interagir com o select (garante estado mais recente do LS)
+  const $cronDesc = el('cron-desc');
+  if ($cronDesc){
+    ['focus','mousedown','click'].forEach(evt => $cronDesc.addEventListener(evt, fillSelect));
+  }
+
+  // Fallback: observa a tabela de investimentos (se o broadcast falhar por algum motivo)
+  const invTbody = document.querySelector('#invest-tabela tbody');
+  if (invTbody && 'MutationObserver' in window){
+    new MutationObserver(()=>fillSelect()).observe(invTbody, {childList:true});
+  }
+
+  // Submit
+  document.getElementById('cron-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    const desc = el('cron-desc').value.trim();
+    if(!desc){ alert('Escolha uma descrição.'); return; }
+    const obj={
+      desc,
+      parcela:Math.max(1,parseInt(el('cron-parcela').value||'1',10)),
+      pct:toDec(parsePercent(el('cron-lib').value||'0')),
+      tri:parseInt(el('cron-tri').value||'1',10),
+      ano:parseInt(el('cron-ano').value||new Date().getFullYear(),10)
+    };
+    const rows=read(); const i=parseInt(el('cron-editIndex').value,10);
+    if(i>=0) rows[i]=obj; else rows.push(obj);
+    write(rows); render(); e.target.reset();
+    el('cron-editIndex').value=-1;
+    el('cron-ano').value=new Date().getFullYear();
+    el('cron-lib').value='100,00%';
+    el('cron-tri').value='3';
+  });
+
+  // Editar/Excluir
+  document.addEventListener('click',e=>{
+    const d=e.target.closest('[data-c-d]'); const ed=e.target.closest('[data-c-e]');
+    if(d){
+      const rows=read();
+      rows.splice(Number(d.getAttribute('data-c-d')),1);
+      write(rows); render();
+    }
+    if(ed){
+      const rows=read(); const i=Number(ed.getAttribute('data-c-e')), r=rows[i];
+      el('cron-desc').value=r.desc; el('cron-parcela').value=r.parcela; el('cron-lib').value=`${fmtNum2.format(r.pct)}%`;
+      el('cron-tri').value=r.tri; el('cron-ano').value=r.ano; el('cron-editIndex').value=i;
+      el('cron-btnSalvar').textContent='Salvar alteração'; window.scrollTo({top:0,behavior:'smooth'});
+    }
+  });
+
+  // Cancelar
+  el('cron-btnCancelar').addEventListener('click',()=>{
+    document.getElementById('cron-form').reset();
+    el('cron-ano').value=new Date().getFullYear(); el('cron-lib').value='100,00%'; el('cron-tri').value='3';
+    el('cron-editIndex').value=-1; el('cron-btnSalvar').textContent='Atualizar';
+  });
+
+  // Apagar tudo
+  el('cron-btnApagarTudo').addEventListener('click',()=>{
+    if(confirm('Apagar todos os lançamentos do cronograma?')){
+      localStorage.removeItem(LS);
+      render();
+    }
+  });
+})();
+/* ---------------------- RESUMOS (auto) -------------------- */
+
+/* ---------------------- RESUMOS (auto) -------------------- */
+(function(){
+  const LS_AGR='agricola.rows.v1', LS_PEC='pecuaria.rows.v2';
+  const read=(k)=>{ try{ const d=JSON.parse(localStorage.getItem(k)||'[]'); return Array.isArray(d)?d:[]; }catch(_){ return []; } };
+
+  // Receitas = somatório das RECEITAS (campo r.rec)
+  function calcReceitas(){
+    const agr = read(LS_AGR); const pec = read(LS_PEC);
+    const rAgr = agr.reduce((s,r)=> s + (Number(r.rec)||0), 0);
+    const rPec = pec.reduce((s,r)=> s + (Number(r.rec)||0), 0);
+    const total = rAgr + rPec;
+    el('rec-agr').textContent = toBRL(rAgr);
+    el('rec-pec').textContent = toBRL(rPec);
+    el('rec-total').innerHTML = `<strong>${toBRL(total)}</strong>`;
+  }
+
+  // Despesas = Receita 4º ano × (Custo padrão %)
+  function calcDespesas(){
+    const agr = read(LS_AGR); const pec = read(LS_PEC);
+    const dAgr = agr.reduce((s,r)=>{
+      const rec = Number(r.rec)||0;
+      const pct = (r.pct==null?0:Number(r.pct))/100;
+      return s + rec * pct;
+    }, 0);
+    const dPec = pec.reduce((s,r)=>{
+      const rec = Number(r.rec)||0;
+      const pct = (r.pct==null?0:Number(r.pct))/100;
+      return s + rec * pct;
+    }, 0);
+    const total = dAgr + dPec;
+    el('des-agr').textContent = toBRL(dAgr);
+    el('des-pec').textContent = toBRL(dPec);
+    el('des-total').innerHTML = `<strong>${toBRL(total)}</strong>`;
+  }
+
+  function recalc(){ calcReceitas(); calcDespesas(); }
+  document.addEventListener('data-changed', ev=>{
+    if(['agricola','pecuaria','invest'].includes(ev.detail.topic)) recalc();
+  });
+  recalc();
+})();
+
+
+/* ---------------------- FLUXO DE CAIXA (0..25) ------------ */
+(function () {
+  /* Cabeçalho 0..25 */
+  const head = el('fluxo-head-row');
+  head.innerHTML = '<th>DESCRIÇÃO</th>';
+  for (let y = 0; y <= 25; y++) {
+    const th = document.createElement('th');
+    th.textContent = String(y);
+    head.appendChild(th);
+  }
+
+  /* Linhas do fluxo */
+  const rows = [
+    { key:'r1',  label:'1 - RECEITAS', level:0 },
+    { key:'r2',  label:'2 - DESPESAS', level:0 },
+    { key:'r3',  label:'3 - LUCRO OPERACIONAL', level:0 },
+    { key:'r4',  label:'4 - TOTAL ENCARGOS DA PROPOSTA', level:0 },
+    { key:'r41', label:'4.1 - JUROS DO FINANCIAMENTO DA TERRA', level:1 },
+    { key:'r42', label:'4.2 - JUROS DO FINANCIAMENTO PRONAF', level:1 },
+    { key:'r43', label:'4.3 - ENCARGOS DO FINANCIAMENTO PRONAF', level:1 },
+    { key:'r5',  label:'5 - CAPACIDADE DE PAGAMENTO', level:0 },
+    { key:'r6',  label:'6 - TOTAL AMORTIZAÇÕES', level:0 },
+    { key:'r61', label:'6.1 - AMORTIZAÇÃO DA TERRA', level:1 },
+    { key:'r62', label:'6.2 - AMORTIZAÇÃO DO PRONAF', level:1 },
+    { key:'r7',  label:'7 - LUCRO LÍQUIDO', level:0 },
+    { key:'r9',  label:'9 - SALDO DO FINANCIAMENTO DA TERRA', level:0 },
+    { key:'r10', label:'10 - SALDO DO FINANCIAMENTO PRONAF', level:0 },
+    { key:'r11', label:'11 - SALDO DEVEDOR PRINCIPAL DO PRONAF', level:0 },
+    { key:'r8',  label:'8 - PERCENTUAL DE UTILIZAÇÃO', level:0 },
+  ];
+
+  /* Monta o corpo */
+  const tb = el('fluxo-body');
+  tb.innerHTML = '';
+  const rowEls = {};
+  rows.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.classList.add(r.level === 0 ? 'row-group' : 'row-sub');
+    tr.dataset.key = r.key;
+    const first = document.createElement('td');
+    first.innerHTML = `<span title="${r.label}">${r.label}</span>`;
+    tr.appendChild(first);
+    for (let y = 0; y <= 25; y++) {
+      const td = document.createElement('td');
+      td.textContent = '–';
+      tr.appendChild(td);
+    }
+    tb.appendChild(tr);
+    rowEls[r.key] = tr;
+  });
+
+  /* helpers */
+  function setRowValues(key, vals, tips){
+    const row = rowEls[key]; if(!row) return;
+    const tds = row.querySelectorAll('td');
+    for (let i = 0; i <= 25; i++) {
+      const v = vals[i];
+      tds[i+1].textContent = (v==null) ? '–' : toBRL(v);
+      tds[i+1].title = tips && tips[i] ? tips[i] : '';
+    }
+  }
+  function setRowPercent(key, vals, tips){
+    const row = rowEls[key]; if(!row) return;
+    const tds = row.querySelectorAll('td');
+    for (let i = 0; i <= 25; i++) {
+      const v = vals[i];
+      tds[i+1].textContent = (v==null || !isFinite(v)) ? '–' : `${fmtNum2.format(v)}%`;
+      tds[i+1].title = tips && tips[i] ? tips[i] : '';
+    }
+  }
+
+  /* parâmetros do topo (salvos em localStorage) */
+  function getParams(){
+    try{
+      const p = JSON.parse(localStorage.getItem('fluxo.params.v1') || '{}');
+      return {
+        tpncf: Number(p.tpncf) || 0,
+        jpncf: Number(p.jpncf) || 0,
+        tpron: Number(p.tpron) || 0,
+        jpron: Number(p.jpron) || 0
+      };
+    }catch(_){
+      return { tpncf:0, jpncf:0, tpron:0, jpron:0 };
+    }
+  }
+
+  function updateFluxo(){
+    /* 1 e 2 (a partir do 4º ano) */
+    const receitasTotal = toDec(parseBRL(document.getElementById('rec-total').textContent));
+    const despesasTotal = toDec(parseBRL(document.getElementById('des-total').textContent));
+    const r1 = Array.from({length:26},(_,i)=> i<4?null:receitasTotal);
+    const r2 = Array.from({length:26},(_,i)=> i<4?null:despesasTotal);
+
+    /* 3 = 1 − 2 */
+    const r3 = r1.map((v,i)=> (v==null || r2[i]==null) ? null : toDec(v - r2[i]));
+    const tip3 = r3.map((v,i)=> v==null ? '' : `= ${toBRL(r1[i]||0)} − ${toBRL(r2[i]||0)}`);
+    setRowValues('r1', r1);
+    setRowValues('r2', r2);
+    setRowValues('r3', r3, tip3);
+
+    const { tpncf, jpncf, tpron, jpron } = getParams();
+    const rateTerra  = jpncf/100;
+    const ratePronaf = jpron/100;
+
+    /* 6.2 PRONAF = total/7 (anos 4..10) */
+    const r62 = Array(26).fill(null);
+    const amortPronaf = toDec((tpron||0)/7);
+    for (let i=4;i<=10;i++) r62[i]=amortPronaf;
+    const tip62 = r62.map(v => v==null?'':`= ${toBRL(tpron||0)} / 7`);
+
+    /* ======== TERRA: 4.1 / 6.1 (PRICE) / 9 ======== */
+    const r41=Array(26).fill(null), tip41=Array(26).fill('');
+    const r61=Array(26).fill(null), tip61=Array(26).fill('');
+    const r9 =Array(26).fill(null), tip9 =Array(26).fill('');
+    r9[0] = toDec(tpncf); tip9[0]='= TOTAL DO FINANCIAMENTO DO PNCF';
+
+    for (let i=1;i<=25;i++){
+      const saldoAnt = r9[i-1] || 0;
+      const jTerra   = toDec(saldoAnt * rateTerra);   // 4.1(i)
+      r41[i]=jTerra; tip41[i]=`= ${toBRL(saldoAnt)} × ${fmtNum2.format(jpncf)}%`;
+
+      let aTerra=0, n=Math.max(1,26-i);
+      if (i>=4){
+        aTerra = (rateTerra>0)
+          ? toDec((saldoAnt*rateTerra)/(1-1/Math.pow(1+rateTerra,n)))
+          : toDec(saldoAnt/n);
+        r61[i]=aTerra;
+        tip61[i] = (rateTerra>0)
+          ? `= PRICE(saldo ${toBRL(saldoAnt)}, i=${fmtNum2.format(jpncf)}%, n=${n})`
+          : `= ${toBRL(saldoAnt)} / ${n}`;
+      }
+      r9[i] = toDec(saldoAnt + jTerra - (r61[i] || 0));
+      tip9[i]=`= ${toBRL(saldoAnt)} + ${toBRL(jTerra)} − ${toBRL(r61[i]||0)}`;
+    }
+
+    /* ======== PRONAF (ordem corrigida) ======== */
+    const r11=Array(26).fill(null), tip11=Array(26).fill('');
+    const r42=Array(26).fill(null), tip42=Array(26).fill('');
+    const r10=Array(26).fill(null), tip10=Array(26).fill('');
+    const r43=Array(26).fill(null), tip43=Array(26).fill('');
+
+    /* 11(0) e capitalização 1..3 */
+    r11[0]=toDec(tpron); tip11[0]='TOTAL DO FINANCIAMENTO DO PRONAF';
+    for (let i=1;i<=3;i++){
+      r11[i]   = toDec((r11[i-1]||0) * (1 + ratePronaf));
+      tip11[i] = `= ${toBRL(r11[i-1]||0)} × (1 + ${fmtNum2.format(jpron)}%)`;
+    }
+
+    /* --- Ano 4 --- */
+    r42[4]   = toDec((r11[3]||0) * ratePronaf);
+    tip42[4] = `= ${toBRL(r11[3]||0)} × ${fmtNum2.format(jpron)}%`;
+
+    r10[4]   = toDec((r11[3]||0) - (r62[4]||0) + (r42[4]||0));
+    tip10[4] = `= ${toBRL(r11[3]||0)} − ${toBRL(r62[4]||0)} + ${toBRL(r42[4]||0)}`;
+
+    const coef={4:0.0032812,5:0.0049019,6:0.0073165,7:0.0113072,8:0.019182,9:0.042049,10:1};
+    r43[4]   = toDec((r10[4]||0) * (coef[4]||0));
+    tip43[4] = `= ${toBRL(r10[4]||0)} × ${coef[4]}`;
+
+    r11[4]   = toDec((r10[4]||0) - (r43[4]||0));
+    tip11[4] = `= ${toBRL(r10[4]||0)} − ${toBRL(r43[4]||0)}`;
+
+    /* --- Anos 5..10 (encadeando) --- */
+    for (let i=5;i<=10;i++){
+      // 4.2(i) = 11(i-1) × juros
+      r42[i]   = toDec((r11[i-1]||0) * ratePronaf);
+      tip42[i] = `= ${toBRL(r11[i-1]||0)} × ${fmtNum2.format(jpron)}%`;
+
+      // 10(i) = 10(i-1) − 6.2(i) + 4.2(i)
+      r10[i]   = toDec((r10[i-1]||0) - (r62[i]||0) + (r42[i]||0));
+      tip10[i] = `= ${toBRL(r10[i-1]||0)} − ${toBRL(r62[i]||0)} + ${toBRL(r42[i]||0)}`;
+
+      // 4.3(i) = coef[i] × 10(i)
+      r43[i]   = toDec((r10[i]||0) * (coef[i]||0));
+      tip43[i] = `= ${toBRL(r10[i]||0)} × ${coef[i]}`;
+
+      // 11(i) = 10(i) − 4.3(i)
+      r11[i]   = toDec((r10[i]||0) - (r43[i]||0));
+      tip11[i] = `= ${toBRL(r10[i]||0)} − ${toBRL(r43[i]||0)}`;
+    }
+
+    /* 6 = 6.1 + 6.2 */
+    const r6 = r61.map((v,i)=> toDec((v||0) + (r62[i]||0)));
+    const tip6 = r6.map((_,i)=> (r6[i]==null)?'':`= ${toBRL(r61[i]||0)} + ${toBRL(r62[i]||0)}`);
+
+    /* 4 = 4.1 + 4.3 */
+    const r4 = r41.map((v,i)=> toDec((v||0) + (r43[i]||0)));
+    const tip4 = r4.map((_,i)=> (r4[i]==null)?'':`= ${toBRL(r41[i]||0)} + ${toBRL(r43[i]||0)}`);
+
+    /* 5 = 3 − 4 */
+    const r5 = r3.map((v,i)=> (v==null)?null:toDec(v - (r4[i]||0)));
+    const tip5 = r5.map((_,i)=> (r5[i]==null)?'':`= ${toBRL(r3[i]||0)} − ${toBRL(r4[i]||0)}`);
+
+    /* 7 = 5 − (4.1 + 4.2) − 6 */
+    const r7 = r5.map((v,i)=> (v==null)?null:toDec(v - (r41[i]||0) - (r42[i]||0) - (r6[i]||0)));
+    const tip7 = r7.map((_,i)=> (r7[i]==null)?'':`= ${toBRL(r5[i]||0)} − ${toBRL(r41[i]||0)} − ${toBRL(r42[i]||0)} − ${toBRL(r6[i]||0)}`);
+
+    /* 8 = 100 × 6 / 3 */
+    const r8 = r6.map((v,i)=> { const den=r3[i]; if(v==null||den==null||den===0) return null; return toDec((v/den)*100); });
+    const tip8 = r8.map((_,i)=> (r8[i]==null)?'':`= ${toBRL(r6[i]||0)} / ${toBRL(r3[i]||0)}`);
+
+    /* Render */
+    setRowValues('r41', r41, tip41);
+    setRowValues('r61', r61, tip61);
+    setRowValues('r9',  r9,  tip9);
+
+    setRowValues('r62', r62, tip62);
+    setRowValues('r42', r42, tip42);
+    setRowValues('r10', r10, tip10);
+    setRowValues('r43', r43, tip43);
+    setRowValues('r11', r11, tip11);
+
+    setRowValues('r6', r6, tip6);
+    setRowValues('r4', r4, tip4);
+    setRowValues('r5', r5, tip5);
+    setRowValues('r7', r7, tip7);
+    setRowPercent('r8', r8, tip8);
+  }
+
+  /* Atualiza quando os dados ou parâmetros mudam */
+  document.addEventListener('data-changed', ev=>{
+    if(['agricola','pecuaria','invest'].includes(ev.detail.topic)) updateFluxo();
+  });
+  document.addEventListener('fluxo-params-changed', updateFluxo);
+
+  /* Inicial */
+  updateFluxo();
+})();
+
+/* ---- Anexos ---- */
+  (function(){
+    document.querySelectorAll('button[data-target]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const $f = document.getElementById(btn.dataset.target);
+        if ($f) $f.click();
+      });
+    });
+
+    [['ax-art-file','ax-art-text'],['ax-plantas-file','ax-plantas-text'],['ax-docs-file','ax-docs-text']]
+    .forEach(([f,t])=>{
+      const $f=document.getElementById(f), $t=document.getElementById(t);
+      if($f&&$t){ $f.addEventListener('change', ()=>{ $t.value= $f.files?.[0]?.name || ''; }); }
+    });
+  })();
+
+</script>
+
+
+
+</body>
+</html>

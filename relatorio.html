@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Relatório do Plano de Negócio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* Justificar os textos do bloco de Declaração e a observação do fluxo */
+.decl p, .note{
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;     /* ajuda a quebrar palavras na impressão */
+}
+
+  @page { size: A4; margin: 14mm 12mm; }
+  *{ box-sizing:border-box }
+  body{ margin:0; font:12.5px/1.35 "Times New Roman", serif; color:#000 }
+  .wrap{ max-width: 800px; margin: 0 auto; padding: 10px 0 }
+
+  h1{ font-size:16px; text-align:center; margin:0 0 2px; font-weight:bold; text-transform:uppercase }
+  .mb8{ margin-bottom:8px } .mb12{ margin-bottom:12px } .mb16{ margin-bottom:16px }
+  .flex{ display:flex; justify-content:space-between; gap:8px; font-size:12px }
+
+  .sec-title{
+    font-weight:bold; text-transform:uppercase;
+    border:1px solid #000; padding:4px 6px; background:#eee; margin:14px 0 0;
+  }
+
+  table{ width:100%; border-collapse:collapse; table-layout:fixed }
+  th,td{ border:1px solid #000; padding:5px 7px; vertical-align:top; word-wrap:break-word }
+  th{ background:#f2f2f2; text-align:left }
+  .right{ text-align:right } .center{ text-align:center } .justify{ text-align:justify }
+
+  /* larguras das colunas (dão mais espaço para DESCRIÇÃO) */
+  col.w-desc    { width: 42% }   /* primeira coluna “Descrição …” (uma só) */
+  col.w-desc2   { width: 27% }   /* quando existirem 2 colunas descritivas */
+  col.w-uso     { width: 18% }
+  col.w-fonte   { width: 12% }
+  col.w-un      { width: 10% }
+  col.w-num     { width: 10% }
+  col.w-num-sm  { width: 8% }
+  col.w-cur     { width: 13% }   /* moeda */
+
+  /* Assinaturas */
+  .sign-row{ display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:24px }
+  .sign{ height:64px; border-bottom:1px solid #000 }
+  .sign-cap{ text-align:center; font-size:12px; margin-top:4px }
+
+  @media print{ .actions{ display:none } }
+  .actions{ display:flex; gap:8px; justify-content:flex-end; margin:8px 0 6px }
+  .btn{ border:1px solid #000; background:#fff; padding:6px 10px; cursor:pointer; font-weight:bold }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Relatório do Plano de Negócio</h1>
+  <div class="flex mb12">
+    <div>Data de emissão: <span id="r-emissao"></span></div>
+    <div>Protocolo (demo): 000014.0079811/2025</div>
+  </div>
+
+  <div class="actions">
+    <a class="btn" href="projeto.html">Voltar</a>
+    <button class="btn" onclick="window.print()">Imprimir / PDF</button>
+  </div>
+
+  <!-- I - Dados Institucionais (somente os campos do print) -->
+  <div class="sec-title">I - Dados Institucionais</div>
+  <table class="mb12" id="tb-inst">
+    <colgroup><col style="width:180px"><col></colgroup>
+    <tr><td><b>Razão Social:</b></td><td id="inst-razao">EMPRESA DEMO LTDA</td></tr>
+    <tr>
+      <td><b>CNPJ:</b></td>
+      <td><span id="inst-cnpj">00.000.000/0001-00</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;<b>Data Abertura:</b> <span id="inst-abertura">01/01/2015</span></td>
+    </tr>
+    <tr><td><b>Pretenso beneficiário:</b></td><td id="inst-benef">MARCIO FONTES HIRATA</td></tr>
+    <tr><td><b>CPF do requerente:</b></td><td id="inst-cpf">555.555.555-55</td></tr>
+  </table>
+
+  <!-- II - Endereço (mantido simples) -->
+  <div class="sec-title">II - Endereço</div>
+  <table class="mb12">
+    <tr><td style="width:180px"><b>Logradouro / Nº:</b></td><td>Av. Exemplo, nº 123</td></tr>
+    <tr><td><b>CEP:</b></td><td>00000-000 &nbsp;&nbsp;&nbsp; <b>Bairro:</b> Centro</td></tr>
+    <tr><td><b>Município:</b></td><td>Cidade/UF – BR</td></tr>
+  </table>
+
+  <!-- III - Contato (fictício) -->
+  <div class="sec-title">III - Contato</div>
+  <table class="mb16">
+    <tr>
+      <td style="width:33%"><b>Celular</b><br>(00) 90000-0000</td>
+      <td style="width:34%"><b>E-mail</b><br>contato@empresademo.com.br</td>
+      <td style="width:33%"><b>Telefone</b><br>(00) 3000-0000</td>
+    </tr>
+  </table>
+
+  <!-- IV - Dados do Financiamento -->
+  <div class="sec-title">IV - Dados do Financiamento</div>
+  <table class="mb16" id="tb-fin">
+    <thead><tr><th>Descrição</th><th class="right" style="width:180px">Valor</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Investimentos -->
+  <div class="sec-title">Itens Financiados (Investimentos)</div>
+  <table id="tb-inv" class="mb8">
+    <colgroup>
+      <col class="w-desc"><col class="w-uso"><col class="w-fonte"><col class="w-un">
+      <col class="w-num-sm"><col class="w-cur"><col class="w-cur">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Descrição da atividade</th>
+        <th>Uso</th>
+        <th>Fonte</th>
+        <th>Unidade</th>
+        <th class="right">Quantidade</th>
+        <th class="right">Valor Unitário</th>
+        <th class="right">Valor Total</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <table class="mb16">
+    <tr><th>Resumo por Fonte</th><th class="right" style="width:180px">Valor (R$)</th></tr>
+    <tr><td>SIB Total</td><td class="right" id="sum-sib">R$ 0,00</td></tr>
+    <tr><td>PRONAF A Total</td><td class="right" id="sum-pronaf">R$ 0,00</td></tr>
+    <tr><td>Recursos Próprios Total</td><td class="right" id="sum-rp">R$ 0,00</td></tr>
+  </table>
+
+  <!-- Atividades Agrícolas -->
+  <div class="sec-title">Atividades Agrícolas</div>
+  <table id="tb-agr" class="mb16">
+    <colgroup>
+      <col class="w-desc"><col class="w-num"><col class="w-num"><col class="w-un">
+      <col class="w-cur"><col class="w-num"><col class="w-cur">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Descrição da Cultura</th>
+        <th class="right">Área (ha)</th>
+        <th class="right">Produtividade</th>
+        <th>Unidade</th>
+        <th class="right">Valor Unitário</th>
+        <th class="right">Custo padrão (%)</th>
+        <th class="right">Valor Total</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Atividade Pecuária -->
+  <div class="sec-title">Atividade Pecuária</div>
+  <table id="tb-pec" class="mb16">
+    <colgroup>
+      <col class="w-desc2"><col class="w-desc2"><col class="w-num-sm"><col class="w-un">
+      <col class="w-cur"><col class="w-num"><col class="w-cur">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Atividade Pecuário(a)</th>
+        <th>Item comercializado</th>
+        <th class="right">Quantidade</th>
+        <th>Unidade</th>
+        <th class="right">Valor Unitário</th>
+        <th class="right">Custo padrão (%)</th>
+        <th class="right">Valor Total</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Suporte Forrageiro -->
+  <div class="sec-title">Suporte Forrageiro — Uso projetado das terras</div>
+  <table id="tb-uso" class="mb8">
+    <thead>
+      <tr><th>Descrição</th><th class="right" style="width:120px">Área (ha)</th><th class="right" style="width:120px">UA</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="sec-title">Estudo do Suporte Forrageiro</div>
+  <table id="tb-est" class="mb16">
+    <thead><tr><th>Campo</th><th class="right" style="width:180px">UA</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Cronograma -->
+  <div class="sec-title">Cronograma de Desembolso</div>
+  <table id="tb-cron" class="mb16">
+    <thead>
+      <tr>
+        <th>Descrição</th><th class="center" style="width:70px">Parcela</th>
+        <th class="right" style="width:90px">%</th><th class="center" style="width:90px">Trimestre</th><th class="center" style="width:90px">Ano</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Receitas / Despesas -->
+  <div class="sec-title">Receitas – média anual (a partir do 4º ano)</div>
+  <table class="mb12" id="tb-rec">
+    <thead><tr><th>Discriminação</th><th class="right" style="width:180px">Média anual</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="sec-title">Despesas – média anual</div>
+  <table class="mb16" id="tb-des">
+    <thead><tr><th>Discriminação</th><th class="right" style="width:180px">Média anual</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Fluxo (apenas 4º ano) -->
+  <div class="sec-title">Fluxo de Caixa — 4º ano</div>
+  <table class="mb16" id="tb-fluxo">
+    <thead><tr><th>DESCRIÇÃO</th><th class="right" style="width:180px">4º ano</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Declaração -->
+  <!-- Declaração / Assinatura -->
+<div class="sec-title">Declaração / Assinatura</div>
+
+<div class="decl">
+  <p><b>Termo de Concordância da Elaboração do Projeto Técnico de Financiamento – PTF</b></p>
+
+  <p><b>EU, MARCIO FONTES HIRATA</b>, DECLARO QUE TODOS OS INVESTIMENTOS PREVISTOS NESTE PROJETO PRODUTIVO FORAM DEFINIDOS POR MIM E DISCUTIDOS COMO O TÉCNICO RESPONSÁVEL, CONSIDERANDO A VIABILIDADE ECONÔMICA, AMBIENTAL E SUSTENTÁVEL NA CONSTRUÇÃO DO FINANCIAMENTO.</p>
+
+  <p><b>Pretenso Beneficiário(a):</b> MARCIO FONTES HIRATA &nbsp;&nbsp; <b>CPF:</b> 555.555.555-55</p>
+
+  <p><b>BERNARDO MELO OLIVEIRA</b>, ENGENHEIRO(A) RESPONSÁVEL PELA ELABORAÇÃO DO PLANO DE NEGÓCIOS, EM NOME DO(A) SENHOR(A) MARCIO FONTES HIRATA, DECLARO QUE TODAS AS INFORMAÇÕES CONTIDAS NESTE SÃO VERDADEIRAS E ME RESPONSABILIZO PELA EXATIDÃO DESTAS. ACRESCENTO QUE O PROJETO SERÁ EXECUTADO COM O MÍNIMO DE ALTERAÇÕES POSSÍVEIS, NÃO DESCARACTERIZANDO ESTE E PRESTAREI TODAS AS INFORMAÇÕES SOLICITADAS PELOS ÓRGÃOS DE CONTROLE E SUPERVISÃO.</p>
+</div>
+
+<div class="sign-row">
+  <div>
+    <div class="sign"></div>
+    <div class="sign-cap">Assinatura do Pretenso Beneficiário<br>044.000.233-23</div>
+  </div>
+  <div>
+    <div class="sign"></div>
+    <div class="sign-cap">Assinatura da Empresa / Técnico Responsável<BR>CREA: 32423423</div>
+  </div>
+
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== helpers ===== */
+const fmtBRL = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+const fmt2   = new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const BRL = n => fmtBRL.format(Number(n||0));
+const PCT = n => (n==null||isNaN(n))?'':fmt2.format(Number(n))+'%';
+const $ = s => document.querySelector(s);
+const today = ()=>{const d=new Date();return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;};
+const readArr = k => { try{const d=JSON.parse(localStorage.getItem(k)||'[]'); return Array.isArray(d)?d:[];}catch(_){return [];} };
+const readObj = k => { try{const d=JSON.parse(localStorage.getItem(k)||'{}'); return d&&typeof d==='object'?d:{};}catch(_){return {};} };
+
+/* emissão */
+$('#r-emissao').textContent = today();
+
+/* IV – Dados do Financiamento */
+(function(){
+  const p = readObj('fluxo.params.v1');
+  const body = $('#tb-fin tbody');
+  const rows = [
+    ['Total do Financiamento do PNCF', BRL(p.tpncf||0)],
+    ['Juros PNCF', PCT(p.jpncf)],
+    ['Rebate (PNCF)', PCT(p.rpncf)],
+    ['Total do Financiamento do PRONAF', BRL(p.tpron||0)],
+    ['Juros PRONAF', PCT(p.jpron)],
+    ['Rebate (PRONAF)', PCT(p.rpron)],
+    ['Carência (anos)', (p.car==null||isNaN(p.car))?'–':fmt2.format(p.car)]
+  ];
+  body.innerHTML = '';
+  rows.forEach(([d,v])=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${d}</td><td class="right">${v}</td>`;
+    body.appendChild(tr);
+  });
+})();
+
+/* Investimentos (com Uso e Fonte logo após) */
+(function(){
+  const rows = readArr('investimentos.rows.v1');
+  const tb = $('#tb-inv tbody'); tb.innerHTML='';
+  let sSIB=0,sPRON=0,sRP=0;
+  rows.forEach(r=>{
+    sSIB  += (r.fonte==='SIB')? (r.valorTotal||0) : 0;
+    sPRON += (r.fonte==='PRONAF')? (r.valorTotal||0) : 0;
+    sRP   += (r.fonte==='RECURSOS PRÓPRIOS')? (r.valorTotal||0) : 0;
+    const tr=document.createElement('tr');
+    tr.innerHTML = `
+      <td>${r.descricao||''}</td>
+      <td>${r.item||''}</td>
+      <td>${r.fonte||''}</td>
+      <td>${r.unidade||''}</td>
+      <td class="right">${fmt2.format(r.quantidade||0)}</td>
+      <td class="right">${BRL(r.valorUnitario||0)}</td>
+      <td class="right">${BRL(r.valorTotal||0)}</td>`;
+    tb.appendChild(tr);
+  });
+  $('#sum-sib').textContent    = BRL(sSIB);
+  $('#sum-pronaf').textContent = BRL(sPRON);
+  $('#sum-rp').textContent     = BRL(sRP);
+})();
+
+/* Agrícolas */
+(function(){
+  const rows=readArr('agricola.rows.v1');
+  const tb=$('#tb-agr tbody'); tb.innerHTML='';
+  rows.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML = `
+      <td>${r.desc||''}</td>
+      <td class="right">${fmt2.format(r.area||0)}</td>
+      <td class="right">${fmt2.format(r.prod||0)}</td>
+      <td>${r.unid||''}</td>
+      <td class="right">${BRL(r.vUnit||0)}</td>
+      <td class="right">${PCT(r.pct)}</td>
+      <td class="right">${BRL(r.vTotal||0)}</td>`;
+    tb.appendChild(tr);
+  });
+})();
+
+/* Pecuária */
+(function(){
+  const rows=readArr('pecuaria.rows.v2');
+  const tb=$('#tb-pec tbody'); tb.innerHTML='';
+  rows.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML = `
+      <td>${r.desc||''}</td>
+      <td>${r.eco||''}</td>
+      <td class="right">${fmt2.format(r.qtd||0)}</td>
+      <td>${r.unid||''}</td>
+      <td class="right">${BRL(r.vUnit||0)}</td>
+      <td class="right">${PCT(r.pct)}</td>
+      <td class="right">${BRL(r.vTotal||0)}</td>`;
+    tb.appendChild(tr);
+  });
+})();
+
+/* Suporte Forrageiro */
+(function(){
+  const agr = readArr('agricola.rows.v1');
+  const areaAgr = agr.filter(r=>String(r.expl||'').toUpperCase()==='AGRÍCOLA').reduce((s,r)=>s+(Number(r.area)||0),0);
+  const uaAgr   = agr.filter(r=>String(r.expl||'').toUpperCase()==='AGRÍCOLA').reduce((s,r)=>s+(Number(r.supp)||0),0);
+  const areaPec = agr.filter(r=>String(r.expl||'').toUpperCase()==='PECUÁRIA').reduce((s,r)=>s+(Number(r.area)||0),0);
+  const uaPec   = agr.filter(r=>String(r.expl||'').toUpperCase()==='PECUÁRIA').reduce((s,r)=>s+(Number(r.supp)||0),0);
+
+  const fp = readObj('forr.params.v1');
+  const preserv = Number(fp['forr-preserv']||0);
+  const benf    = Number(fp['forr-benf']||0);
+  const outros  = Number(fp['forr-outros']||0);
+  const neces   = Number(fp['forr-necess']||0);
+
+  const areaTot = areaAgr + areaPec + preserv + benf + outros;
+  const uaTot   = uaAgr + uaPec;
+  const resUA   = uaTot - neces;
+
+  const uso = [
+    ['Exploração Agrícola', areaAgr, uaAgr],
+    ['Exploração Pecuária', areaPec, uaPec],
+    ['Preservação da Propriedade (ha)', preserv, null],
+    ['Ocupado com Benfeitorias (ha)', benf, null],
+    ['Outras áreas (ha)', outros, null],
+    ['Totais', areaTot, uaTot]
+  ];
+  const tb1=$('#tb-uso tbody'); tb1.innerHTML='';
+  uso.forEach(([d,a,ua])=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${d}</td><td class="right">${fmt2.format(a||0)}</td><td class="right">${ua==null?'–':fmt2.format(ua||0)}</td>`;
+    tb1.appendChild(tr);
+  });
+
+  const tb2=$('#tb-est tbody'); tb2.innerHTML='';
+  [['Suporte Forrageiro Previsto',uaTot],['Necessidade de Suporte Forrageiro',neces],['Resultado',resUA],['Situação',resUA>=0?'SUFICIENTE':'INSUFICIENTE']]
+  .forEach(([k,v])=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML = `<td>${k}</td><td class="right">${typeof v==='number'?fmt2.format(v):v}</td>`;
+    tb2.appendChild(tr);
+  });
+})();
+
+/* Cronograma */
+(function(){
+  const rows=readArr('cronograma.rows.v1');
+  const tb=$('#tb-cron tbody'); tb.innerHTML='';
+  rows.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML = `<td>${r.desc}</td><td class="center">${r.parcela}</td><td class="right">${fmt2.format(r.pct)}%</td><td class="center">${r.tri}º</td><td class="center">${r.ano}</td>`;
+    tb.appendChild(tr);
+  });
+})();
+
+/* Receitas & Despesas */
+(function(){
+  const agr = readArr('agricola.rows.v1');
+  const pec = readArr('pecuaria.rows.v2');
+
+  const rAgr = agr.reduce((s,r)=> s + (Number(r.rec)||0), 0);
+  const rPec = pec.reduce((s,r)=> s + (Number(r.rec)||0), 0);
+  const rTot = rAgr + rPec;
+
+  const dAgr = agr.reduce((s,r)=> s + (Number(r.rec)||0) * ((Number(r.pct)||0)/100), 0);
+  const dPec = pec.reduce((s,r)=> s + (Number(r.rec)||0) * ((Number(r.pct)||0)/100), 0);
+  const dTot = dAgr + dPec;
+
+  $('#tb-rec tbody').innerHTML =
+    `<tr><td>Agricultura (soma do Valor Total)</td><td class="right">${BRL(rAgr)}</td></tr>
+     <tr><td>Pecuária (soma do Valor Total)</td><td class="right">${BRL(rPec)}</td></tr>
+     <tr><td><b>Total</b></td><td class="right"><b>${BRL(rTot)}</b></td></tr>`;
+
+  $('#tb-des tbody').innerHTML =
+    `<tr><td>Agricultura (soma do Valor Total)</td><td class="right">${BRL(dAgr)}</td></tr>
+     <tr><td>Pecuária (soma do Valor Total)</td><td class="right">${BRL(dPec)}</td></tr>
+     <tr><td><b>Total</b></td><td class="right"><b>${BRL(dTot)}</b></td></tr>`;
+})();
+
+/* Fluxo — 4º ano (igual ao anterior) */
+(function(){
+  const p = readObj('fluxo.params.v1');
+  const tpncf = Number(p.tpncf||0), jpncf=Number(p.jpncf||0)/100;
+  const tpron = Number(p.tpron||0), jpron=Number(p.jpron||0)/100;
+
+  const agr = readArr('agricola.rows.v1'), pec = readArr('pecuaria.rows.v2');
+  const recTot = agr.reduce((s,r)=>s+(Number(r.rec)||0),0) + pec.reduce((s,r)=>s+(Number(r.rec)||0),0);
+  const desTot = agr.reduce((s,r)=>s+(Number(r.rec)||0)*((Number(r.pct)||0)/100),0) +
+                 pec.reduce((s,r)=>s+(Number(r.rec)||0)*((Number(r.pct)||0)/100),0);
+  const lucroOp = recTot - desTot;
+
+  const saldoTerra3 = tpncf * Math.pow(1+jpncf, 3);
+  const jurosTerra4 = saldoTerra3 * jpncf;
+  const nTerra = 22;
+  const amortTerra4 = jpncf>0 ? (saldoTerra3*jpncf)/(1-1/Math.pow(1+jpncf,nTerra)) : (saldoTerra3/nTerra);
+
+  const saldoPron3 = tpron * Math.pow(1+jpron, 3);
+  const jurosPron4 = saldoPron3 * jpron;
+  const amortPron4 = (tpron/7);
+  const encPron4 = (saldoPron3 - amortPron4 + jurosPron4) * 0.0032812;
+  const saldoPron4 = (saldoPron3 - amortPron4 + jurosPron4) - encPron4;
+
+  const encargos4 = jurosTerra4 + encPron4;
+  const totalAmort4 = amortTerra4 + amortPron4;
+  const capPag4 = lucroOp - encargos4;
+  const lucroLiq4 = capPag4 - jurosTerra4 - jurosPron4 - totalAmort4;
+  const percUtil4 = (lucroOp!==0) ? (totalAmort4/lucroOp*100) : null;
+
+  const rows = [
+    ['1 - RECEITAS', recTot],
+    ['2 - DESPESAS', desTot],
+    ['3 - LUCRO OPERACIONAL', lucroOp],
+    ['4 - TOTAL ENCARGOS DA PROPOSTA', encargos4],
+    ['4.1 - JUROS DO FINANCIAMENTO DA TERRA', jurosTerra4],
+    ['4.2 - JUROS DO FINANCIAMENTO PRONAF', jurosPron4],
+    ['4.3 - ENCARGOS DO FINANCIAMENTO PRONAF', encPron4],
+    ['5 - CAPACIDADE DE PAGAMENTO', capPag4],
+    ['6 - TOTAL AMORTIZAÇÕES', totalAmort4],
+    ['6.1 - AMORTIZAÇÃO DA TERRA', amortTerra4],
+    ['6.2 - AMORTIZAÇÃO DO PRONAF', amortPron4],
+    ['7 - LUCRO LÍQUIDO', lucroLiq4],
+    ['9 - SALDO DO FINANCIAMENTO DA TERRA', saldoTerra3 + jurosTerra4 - amortTerra4],
+    ['10 - SALDO DO FINANCIAMENTO PRONAF', saldoPron4],
+    ['11 - SALDO DEVEDOR PRINCIPAL DO PRONAF', saldoPron4],
+    ['8 - PERCENTUAL DE UTILIZAÇÃO', percUtil4==null?'–':fmt2.format(percUtil4)+'%'],
+  ];
+  const tb=$('#tb-fluxo tbody'); tb.innerHTML='';
+  rows.forEach(([d,v])=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML = `<td>${d}</td><td class="right">${typeof v==='number'?BRL(v):v}</td>`;
+    tb.appendChild(tr);
+  });
+})();
+</script>
+</body>
+</html>
