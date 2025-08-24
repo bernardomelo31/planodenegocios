@@ -1472,22 +1472,25 @@ put('invest-sum-pronaf', sPRON);   // mostrado como "PRONAF A Total (R$)"
 put('invest-sum-rp', sRP);
 
 // --- Sincroniza “TOTAL DO FINANCIAMENTO DO PRONAF” com o cartão PRONAF ---
-(function syncFluxoPronaf(totalPronaf, totalSIB){
+(function syncFluxoPronaf(totalPronaf){
   const KEY = 'fluxo.params.v1';
+
 
   // atualiza o input visível
   const $pron = document.getElementById('fp-total-pronaf');
   if ($pron) $pron.value = toBRL(totalPronaf);
 
   // atualiza o localStorage usado pelo módulo do Fluxo
-  let p = {};
+   let p = {};
   try { p = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(_){}
   p.tpron = toDec(totalPronaf);
+  // não mexe no p.tpncf
   localStorage.setItem(KEY, JSON.stringify(p));
+
 
   // avisa o Fluxo para recalcular
   document.dispatchEvent(new CustomEvent('fluxo-params-changed'));
-})(sPRON, sSIB);
+})(sPRON);
 
     localStorage.setItem(LS,JSON.stringify(rows));
     broadcast('invest');
@@ -2283,6 +2286,7 @@ put('invest-sum-rp', sRP);
 
 </body>
 </html>
+
 
 
 
