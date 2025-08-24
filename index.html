@@ -1312,7 +1312,7 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
           <!-- Linha PNCF -->
           <div class="field">
             <label for="fp-total-pncf">TOTAL DO FINANCIAMENTO DO PNCF</label>
-            <input id="fp-total-pncf" type="text" value="R$ 293.527,64">
+     <input id="fp-total-pncf" type="text" value="R$ 293.527,64" readonly>
           </div>
           <div class="field">
             <label for="fp-juros-pncf">JUROS PNCF</label>
@@ -1326,7 +1326,7 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
           <!-- Linha PRONAF -->
           <div class="field">
             <label for="fp-total-pronaf">TOTAL DO FINANCIAMENTO DO PRONAF</label>
-            <input id="fp-total-pronaf" type="text" value="R$ 293.527,64">
+            <input id="fp-total-pronaf" type="text" value="R$ 0,00">
           </div>
           <div class="field">
             <label for="fp-juros-pronaf">JUROS PRONAF</label>
@@ -1483,7 +1483,6 @@ put('invest-sum-rp', sRP);
   let p = {};
   try { p = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(_){}
   p.tpron = toDec(totalPronaf);
-  p.tpncf = toDec(totalSIB);   // remova esta linha se NÃO quiser atrelar PNCF ao SIB
   localStorage.setItem(KEY, JSON.stringify(p));
 
   // avisa o Fluxo para recalcular
@@ -2284,6 +2283,7 @@ put('invest-sum-rp', sRP);
 
 </body>
 </html>
+
 
 
 
