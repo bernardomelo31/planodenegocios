@@ -909,9 +909,9 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
         <div class="grid-flow">
           <!-- Linha PNCF -->
           <div class="field">
-            <label for="fp-total-pncf">TOTAL DO FINANCIAMENTO DO PNCF</label>
-            <input id="fp-total-pncf" type="text" value="R$ 0,00">
-          </div>
+  <label for="fp-total-pncf">TOTAL DO FINANCIAMENTO DO PNCF</label>
+  <input id="fp-total-pncf" type="text" value="R$ 293.527,64" readonly>
+</div>
           <div class="field">
             <label for="fp-juros-pncf">JUROS PNCF</label>
             <input id="fp-juros-pncf" type="text" value="0,50%">
@@ -1081,7 +1081,6 @@ put('invest-sum-rp', sRP);
   let p = {};
   try { p = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(_){}
   p.tpron = toDec(totalPronaf);
-  p.tpncf = toDec(totalSIB);   // remova esta linha se NÃO quiser atrelar PNCF ao SIB
   localStorage.setItem(KEY, JSON.stringify(p));
 
   // avisa o Fluxo para recalcular
@@ -1404,7 +1403,7 @@ put('invest-sum-rp', sRP);
 
   function load(){
     let p={}; try{ p=JSON.parse(localStorage.getItem(LS)||'{}'); }catch(_){}
-    if(p.tpncf!=null) el('fp-total-pncf').value = toBRL(p.tpncf);
+    if(p.tpncf!=null) el('fp-total-pncf').value = toBRL(293527.64);
     if(p.tpron!=null) el('fp-total-pronaf').value = toBRL(p.tpron);
     if(p.jpncf!=null) el('fp-juros-pncf').value = pctToText(p.jpncf);
     if(p.rpncf!=null) el('fp-rebate-pncf').value = pctToText(p.rpncf);
@@ -1414,7 +1413,7 @@ put('invest-sum-rp', sRP);
   }
   function save(){
     const p={
-      tpncf: parseBRL(el('fp-total-pncf').value),
+      tpncf: 293527.64, // sempre fixo
       tpron: parseBRL(el('fp-total-pronaf').value),
       jpncf: parsePercent(el('fp-juros-pncf').value),
       rpncf: parsePercent(el('fp-rebate-pncf').value),
@@ -1882,3 +1881,4 @@ put('invest-sum-rp', sRP);
 
 </body>
 </html>
+
