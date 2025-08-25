@@ -375,23 +375,43 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
 
     <form id="invest-form" class="card">
       <div class="grid">
- <div class="field row-col-8"><label for="invest-descricao">Descrição da atividade</label><select id="invest-descricao" required><option value="" selected disabled>Selecione...</option><option value="Abacate Irrigado ">	Abacate Irrigado </option>
-<option value="	Abacate Sequeiro">	Abacate Sequeiro (Agricultura/Fruticultura)	</option>
-<option value="	Abacaxi Irrigado (Agricultura/Fruticultura)	">	Abacaxi Irrigado (Agricultura/Fruticultura)	</option>
-<option value="	Abacaxi Sequeiro (Agricultura/Fruticultura)	">	Abacaxi Sequeiro (Agricultura/Fruticultura)	</option>
-<option value="	Abobora Irrigado (Agricultura/Olericultura)	">	Abobora Irrigado (Agricultura/Olericultura)	</option>
-<option value="	Abobora Sequeiro (Agricultura/Olericultura)	">	Abobora Sequeiro (Agricultura/Olericultura)	</option>
-<option value="	Acai Irrigado">	Acai Irrigado (Agricultura/Fruticultura)	</option>
-<option value="	Acai Sequeiro">	Acai Sequeiro (Agricultura/Fruticultura)	</option>
-<option value="	Acelga (Agricultura/Olericultura)	">	Acelga (Agricultura/Olericultura)	</option>
-<option value="	Acerola Irrigado (Agricultura/Fruticultura)	">	Acerola Irrigado (Agricultura/Fruticultura)	</option>
-<option value="	Acerola Sequeiro (Agricultura/Fruticultura)	">	Acerola Sequeiro (Agricultura/Fruticultura)	</option>
-<option value="	Adubos,fertilizantes e corretivos do solo (Comercio/Com.Atacadista)	">	Adubos,fertilizantes e corretivos do solo (Comercio/Com.Atacadista)	</option>
-<option value="	Agricultura/Agrossilvicultura (Agricultura/Ecologico)	">	Agricultura/Agrossilvicultura (Agricultura/Ecologico)	</option>
-<option value="	Capim Capiaçu	">	Capim Capiaçu		</option>
-<option value="	Bovinos - Aptidão Leite - Matriz 	">	Bovinos - Aptidão Leite - Matriz 	</option>
-<option value="	SAF (Dendê + Cacau + Essência Florestal)">SAF (Dendê + Cacau + Essência Florestal)</option>
-
+ <div class="field row-col-8"><label for="invest-descricao">Descrição da atividade</label><select id="invest-descricao" required><option value="" selected disabled>Selecione...<option value="Abacate Irrigado">Abacate Irrigado</option>
+<option value="Abacate Sequeiro">Abacate Sequeiro</option>
+<option value="Abacaxi Irrigado">Abacaxi Irrigado</option>
+<option value="Abacaxi Sequeiro">Abacaxi Sequeiro</option>
+<option value="Abobora Irrigado">Abobora Irrigado</option>
+<option value="Abobora Sequeiro">Abobora Sequeiro</option>
+<option value="Acai Irrigado">Acai Irrigado</option>
+<option value="Acai Sequeiro">Acai Sequeiro</option>
+<option value="Acelga">Acelga</option>
+<option value="Acerola Irrigado">Acerola Irrigado</option>
+<option value="Acerola Sequeiro">Acerola Sequeiro</option>
+<option value="Adubos, fertilizantes e corretivos do solo">Adubos, fertilizantes e corretivos do solo</option>
+<option value="Agricultura/Agrossilvicultura">Agricultura/Agrossilvicultura</option>
+<option value="Agricultura/Biodinamica">Agricultura/Biodinamica</option>
+<option value="Agricultura/Biologica">Agricultura/Biologica</option>
+<option value="Agricultura/Natural">Agricultura/Natural</option>
+<option value="Agricultura/Permacultura">Agricultura/Permacultura</option>
+<option value="Alface">Alface</option>
+<option value="Alface Hidroponia">Alface Hidroponia</option>
+<option value="Algodao Irrigado/Arboreo">Algodao Irrigado/Arboreo</option>
+<option value="Algodao Irrigado/Herbaceo">Algodao Irrigado/Herbaceo</option>
+<option value="Algodao Sequeiro/Arboreo">Algodao Sequeiro/Arboreo</option>
+<option value="Algodao Sequeiro/Herbaceo">Algodao Sequeiro/Herbaceo</option>
+<option value="Alho Irrigado">Alho Irrigado</option>
+<option value="Alimentos Naturais, com práticas ecológicas">Alimentos Naturais, com práticas ecológicas</option>
+<option value="Amendoim Irrigado">Amendoim Irrigado</option>
+<option value="Amendoim Sequeiro">Amendoim Sequeiro</option>
+<option value="Apicultura Fixa">Apicultura Fixa</option>
+<option value="Apicultura Migratoria">Apicultura Migratoria</option>
+<option value="Arroz Irrigado/Graos">Arroz Irrigado/Graos</option>
+<option value="Arroz Irrigado/Semente">Arroz Irrigado/Semente</option>
+<option value="Arroz Sequeiro/Arroz">Arroz Sequeiro/Arroz</option>
+<option value="Ata/Pinha Irrigado">Ata/Pinha Irrigado</option>
+<option value="Ata/Pinha Sequeiro">Ata/Pinha Sequeiro</option>
+<option value="Avicultura">Avicultura</option>
+<option value="Avicultura/Corte">Avicultura/Corte</option>
+<option value="Avicultura/Postura">Avicultura/Postura</option>
 </select></div>
                 <div class="field row-col-4"><label for="invest-categoria">Categoria</label><select id="invest-categoria" required><option value="" selected disabled>Selecione...</option><option value="AMBIENTAL">AMBIENTAL</option>
 <option value="ELETRIFICACAO">ELETRIFICAÇÃO</option>
@@ -613,7 +633,33 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
       <div class="grid">
         <div class="field row-col-3"><label for="agr-areaHa">Área (ha)</label><input id="agr-areaHa" type="number" min="0" max="9999.99" step="0.01" required placeholder="0,00" inputmode="decimal"></div>
         <div class="field row-col-3"><label for="agr-produtividade">Produtividade (ha)</label><input id="agr-produtividade" type="number" min="0" step="0.01" required placeholder="0,00" inputmode="decimal"></div>
-        <div class="field row-col-3"><label for="agr-unidade">Unidade</label><select id="agr-unidade" required><option value="" selected disabled>Selecione...</option><option>Saca</option><option>Kg</option><option>Caixa</option><option>Litro</option></select></div>
+        <div class="field row-col-3"><label for="agr-unidade">Unidade</label><select id="agr-unidade" required><option value="" selected disabled>Selecione...</option><option value="	Arroba	">	Arroba	</option>
+<option value="	Cabeça	">	Cabeça	</option>
+<option value="	Caixa	">	Caixa	</option>
+<option value="	Dz	">	Dz	</option>
+<option value="	Gal	">	Gal	</option>
+<option value="	garrafa	">	garrafa	</option>
+<option value="	Ha	">	Ha	</option>
+<option value="	hl	">	hl	</option>
+<option value="	kg	">	kg	</option>
+<option value="	l	">	l	</option>
+<option value="	Lata	">	Lata	</option>
+<option value="	m2	">	m2	</option>
+<option value="	m2 ranario	">	m2 ranario	</option>
+<option value="	m3	">	m3	</option>
+<option value="	Maço	">	Maço	</option>
+<option value="	Mil Cab	">	Mil Cab	</option>
+<option value="	Mil Dúzias	">	Mil Dúzias	</option>
+<option value="	Mil Litros	">	Mil Litros	</option>
+<option value="	Mil Mudas	">	Mil Mudas	</option>
+<option value="	Mil Pés	">	Mil Pés	</option>
+<option value="	Mil Unid	">	Mil Unid	</option>
+<option value="	Pacote	">	Pacote	</option>
+<option value="	Pés	">	Pés	</option>
+<option value="	t	">	t	</option>
+<option value="	T/Ha	">	T/Ha	</option>
+<option value="	UA	">	UA	</option>
+<option value="	Unidade	">	Unidade	</option></select></div>
         <div class="field row-col-3"><label for="agr-valorUnit">Valor Unitário (R$)</label><input id="agr-valorUnit" type="text" required placeholder="R$ 0,00" inputmode="decimal"></div>
 
 
@@ -726,14 +772,82 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
 <option>Sericicultura</option>
 <option>Suinocultura</option></select></div>
         <div class="field row-col-4"><label for="pec-eco">Item comercializado</label><select id="pec-eco" required><option value="" selected disabled>Selecione...</option>
-<option>Matrizes Descartadas</option>
-<option>Novilho Vendido</option>
-<option>Novilha Vendida</option>
-<option>Queijo (Kg)</option>
-<option>Leite Para Venda</option>
+<option value="Vacas">Vacas</option>
+<option value="Novilhas">Novilhas</option>
+<option value="Novilhos">Novilhos</option>
+<option value="Garrotas">Garrotas</option>
+<option value="Garrotes">Garrotes</option>
+<option value="Bezerras">Bezerras</option>
+<option value="Bezerros">Bezerros</option>
+<option value="Esterco">Esterco</option>
+<option value="Leite">Leite</option>
+<option value="Queijo">Queijo</option>
+<option value="Manteiga, Requeijão e Iogurte">Manteiga, Requeijão e Iogurte</option>
+<option value="Matrizes">Matrizes</option>
+<option value="Fêmeas 1 a 2 anos">Fêmeas 1 a 2 anos</option>
+<option value="Machos 1 a 2 anos">Machos 1 a 2 anos</option>
+<option value="Fêmeas 0 a 1 ano">Fêmeas 0 a 1 ano</option>
+<option value="Machos 0 a 1 ano">Machos 0 a 1 ano</option>
+<option value="Alevino">Alevino</option>
+<option value="Peixe para abate (vivo)">Peixe para abate (vivo)</option>
+<option value="Peixe eviscerado / inteiro resfriado">Peixe eviscerado / inteiro resfriado</option>
+<option value="Filé de peixe">Filé de peixe</option>
+<option value="Camarão para abate (vivo)">Camarão para abate (vivo)</option>
+<option value="Camarão sem cabeça / descascado">Camarão sem cabeça / descascado</option>
+<option value="Camarão inteiro fresco">Camarão inteiro fresco</option>
+<option value="Leitão desmamado">Leitão desmamado</option>
+<option value="Leitão crechário">Leitão crechário</option>
+<option value="Suíno magro (recria)">Suíno magro (recria)</option>
+<option value="Suíno terminado / abate">Suíno terminado / abate</option>
+<option value="Matrizes de descarte">Matrizes de descarte</option>
+<option value="Cachaços reprodutores">Cachaços reprodutores</option>
+<option value="Frango vivo para abate">Frango vivo para abate</option>
+<option value="Frango abatido (resfriado / congelado)">Frango abatido (resfriado / congelado)</option>
+<option value="Ovos">Ovos</option>
+<option value="Galinhas de descarte (abate)">Galinhas de descarte (abate)</option>
+<option value="Mel">Mel</option>
+<option value="Cera de abelha">Cera de abelha</option>
+<option value="Própolis (bruta / extrato)">Própolis (bruta / extrato)</option>
+<option value="Pólen apícola">Pólen apícola</option>
+<option value="Geléia real">Geléia real</option>
+<option value="Enxames, Núcleos e Rainhas">Enxames, Núcleos e Rainhas</option>
+<option value="Colmeias">Colmeias</option>
+<option value="Pescado fresco (peixes)">Pescado fresco (peixes)</option>
+<option value="Peixe eviscerado / fileado / postas">Peixe eviscerado / fileado / postas</option>
+<option value="Carne de rã">Carne de rã</option>
+<option value="Bezerro búfalo desmamado (macho)">Bezerro búfalo desmamado (macho)</option>
+<option value="Bezerra búfala desmamada (fêmea)">Bezerra búfala desmamada (fêmea)</option>
+<option value="Búfalo gordo / novilho terminado (abate)">Búfalo gordo / novilho terminado (abate)</option>
+<option value="Búfala de descarte (abate)">Búfala de descarte (abate)</option>
 </select></div>
         <div class="field row-col-3"><label for="pec-quantidade">Quantidade</label><input id="pec-quantidade" type="number" step="0.01" min="0" required placeholder="0,00"></div>
-        <div class="field row-col-3"><label for="pec-unidade">Unidade</label><select id="pec-unidade" required><option value="" selected disabled>Selecione...</option><option>CABEÇA</option><option>LITRO</option><option>KG</option><option>ARROBA</option><option>DOSE</option><option>HECTARE</option></select></div>
+        <div class="field row-col-3"><label for="pec-unidade">Unidade</label><select id="pec-unidade" required><option value="" selected disabled>Selecione...</option><option value="	Arroba	">	Arroba	</option>
+<option value="	Cabeça	">	Cabeça	</option>
+<option value="	Caixa	">	Caixa	</option>
+<option value="	Dz	">	Dz	</option>
+<option value="	Gal	">	Gal	</option>
+<option value="	garrafa	">	garrafa	</option>
+<option value="	Ha	">	Ha	</option>
+<option value="	hl	">	hl	</option>
+<option value="	kg	">	kg	</option>
+<option value="	l	">	l	</option>
+<option value="	Lata	">	Lata	</option>
+<option value="	m2	">	m2	</option>
+<option value="	m2 ranario	">	m2 ranario	</option>
+<option value="	m3	">	m3	</option>
+<option value="	Maço	">	Maço	</option>
+<option value="	Mil Cab	">	Mil Cab	</option>
+<option value="	Mil Dúzias	">	Mil Dúzias	</option>
+<option value="	Mil Litros	">	Mil Litros	</option>
+<option value="	Mil Mudas	">	Mil Mudas	</option>
+<option value="	Mil Pés	">	Mil Pés	</option>
+<option value="	Mil Unid	">	Mil Unid	</option>
+<option value="	Pacote	">	Pacote	</option>
+<option value="	Pés	">	Pés	</option>
+<option value="	t	">	t	</option>
+<option value="	T/Ha	">	T/Ha	</option>
+<option value="	UA	">	UA	</option>
+<option value="	Unidade	">	Unidade	</option></select></div>
         <div class="field row-col-3"><label for="pec-valorUnit">Valor Unitário (R$)</label><input id="pec-valorUnit" type="text" required placeholder="R$ 0,00" inputmode="decimal"></div>
 
         <div class="field row-col-3"><label for="pec-custoPadrao">Custo padrão (%)</label><input id="pec-custoPadrao" type="text" placeholder="0,00%" inputmode="decimal"></div>
@@ -1881,4 +1995,5 @@ put('invest-sum-rp', sRP);
 
 </body>
 </html>
+
 
