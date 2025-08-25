@@ -1109,20 +1109,19 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
     </div>
   </div>
 
-<div class="inline-actions">
-  <!-- Download da planilha -->
-  <div class="download">
-    <label class="hint">Planilha de cálculo de evolução do rebanho e Suporte Forrageiro</label><br>
-    <a href="https://docs.google.com/spreadsheets/d/1tkatBRaPd_tJOh7uYrZgNlg_4fjwyUc_/export?format=xlsx"
-       target="_blank"
-       rel="noopener"
-       download>
-      <button type="button" class="btn outline btn-icon" title="Baixar planilha">
-        <span class="material-symbols-outlined">download</span>
-      </button>
-    </a>
-  </div>
-</div>
+ <div class="inline-actions">
+    <!-- Download da planilha -->
+    <div class="download">
+      <label class="hint">Planilha de cálculo de evolução do rebanho e Suporte Forrageiro</label><br>
+         <label class="hint">Planilha de cálculo de evolução do rebanho e Suporte Forrageiro</label><br>
+    <button type="button" class="btn outline btn-icon"
+            title="Baixar planilha"
+            onclick="window.open('https://docs.google.com/spreadsheets/d/1tkatBRaPd_tJOh7uYrZgNlg_4fjwyUc_/export?format=xlsx','_blank')">
+      <span class="material-symbols-outlined">download</span>
+    </button>
+
+    </div>
+
 
 
     <!-- “Anexar” (somente visual) -->
@@ -2422,6 +2421,7 @@ put('invest-sum-rp', sRP);
 
 </body>
 </html>
+
 
 
 
