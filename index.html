@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
@@ -17,7 +16,7 @@
 
   --oc-bg:#f5f7fa;             /* fundo da página */
   --oc-card:#ffffff;           /* cartões/painéis */
-  --oc-borda:#e5e9f2;          /* linhas */aba
+  --oc-borda:#e5e9f2;          /* linhas */
   --oc-ink:#1f2937;            /* texto principal */
   --oc-muted:#6b7280;          /* texto secundário */
 
@@ -375,7 +374,7 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
 
     <form id="invest-form" class="card">
       <div class="grid">
- <div class="field row-col-8"><label for="invest-descricao">Descrição da atividade</label><select id="invest-descricao" required><option value="" selected disabled>Selecione...</option><option value="Abacate Irrigado ">	Abacate Irrigado </option>
+        <div class="field row-col-8"><label for="invest-descricao">Descrição da atividade</label><select id="invest-descricao" required><option value="" selected disabled>Selecione...</option><option value="Abacate Irrigado ">	Abacate Irrigado </option>
 <option value="Abacate Irrigado">Abacate Irrigado</option>
 <option value="Abacate Sequeiro">Abacate Sequeiro</option>
 <option value="Abacaxi Irrigado">Abacaxi Irrigado</option>
@@ -780,8 +779,6 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
         <div class="field row-col-6"><label for="invest-fonte">Fonte de Investimento</label><select id="invest-fonte" required><option value="" selected disabled>Selecione...</option><option>SIB</option><option>PRONAF</option><option>RECURSOS PRÓPRIOS</option></select></div>
       </div>
       <div class="actions">
-
-
         <button class="btn btn-cta" type="submit" id="invest-btnSalvar">Adicionar à tabela</button>
         <button class="btn outline" type="button" id="invest-btnLimpar">Limpar</button>
         <button class="btn info" type="button" id="invest-btnExportar">Exportar CSV</button>
@@ -803,80 +800,43 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
         </table>
       </div>
       <div class="totals">Total geral: <span id="invest-totalGeral">R$ 0,00</span></div>
-        <br>
-<!-- Anexos Complementares -->
-        <div class="field">
-          <label>Anexar orçamentos, plantas baixas e documentos complementares relacionados ao projeto produtivo</label>
-          <div class="ax-row">
-            <input id="ax-plantas-text" type="text" placeholder="Selecione um arquivo..." readonly />
-            <input id="ax-plantas-file" type="file" hidden />
-            <button type="button" class="btn outline ax-clip" data-target="ax-plantas-file" title="Anexar">
-              <span class="material-icons">attach_file</span>
-            </button>
-          </div>
+      <br>
+      <!-- Anexos Complementares -->
+      <div class="field">
+        <label>Anexar orçamentos, plantas baixas e documentos complementares relacionados ao projeto produtivo</label>
+        <div class="ax-row">
+          <input id="ax-plantas-text" type="text" placeholder="Selecione um arquivo..." readonly />
+          <input id="ax-plantas-file" type="file" hidden />
+          <button type="button" class="btn outline ax-clip" data-target="ax-plantas-file" title="Anexar">
+            <span class="material-icons">attach_file</span>
+          </button>
         </div>
- <br>
+      </div>
+      <br>
     </div>
-<!-- Resumo por fonte de investimento -->
-<div class="sum-cards theme-blue" id="invest-sum-cards">
-  <!-- Troque theme-blue por theme-gray se quiser cinza claro -->
-  <div class="sum-card">
-    <div class="cap">SIB Total (R$)</div>
-    <div class="num" id="invest-sum-sib">R$ 0,00</div>
-  </div>
-  <div class="sum-card">
-    <div class="cap">PRONAF A Total (R$)</div>
-    <div class="num" id="invest-sum-pronaf">R$ 0,00</div>
-  </div>
-  <div class="sum-card">
-    <div class="cap">Recursos Próprios Total (R$)</div>
-    <div class="num" id="invest-sum-rp">R$ 0,00</div>
-  </div>
-</div>
+
+    <!-- Resumo por fonte de investimento -->
+    <div class="sum-cards theme-blue" id="invest-sum-cards">
+      <div class="sum-card">
+        <div class="cap">SIB Total (R$)</div>
+        <div class="num" id="invest-sum-sib">R$ 0,00</div>
+      </div>
+      <div class="sum-card">
+        <div class="cap">PRONAF A Total (R$)</div>
+        <div class="num" id="invest-sum-pronaf">R$ 0,00</div>
+      </div>
+      <div class="sum-card">
+        <div class="cap">Recursos Próprios Total (R$)</div>
+        <div class="num" id="invest-sum-rp">R$ 0,00</div>
+      </div>
+    </div>
   </section>
-
-
 
   <!-- ======================================================= -->
   <!-- 2) ATIVIDADE AGRÍCOLA                                  -->
   <!-- ======================================================= -->
   <section class="section" id="sec-agricola">
     <h1 class="title">Atividades Agrícolas</h1>
-<!-- Instruções de uso – Atividades Agrícolas -->
-<div class="card info-use" id="agri-howto">
-  <div class="info-box">
-    <span class="info-icn" aria-hidden="true">i</span>
-    <div>
-      <div class="info-title">Instruções de uso — Atividades Agrícolas</div>
-
-      <p>Use esta seção para cadastrar cada cultura com área, valor unitário, produtividade esperada e demais parâmetros.
-        Antes de preencher, consulte as referências oficiais para definir <em>janela(s) de plantio</em>, <em>ciclo/cultivar</em>, 
-        <em>nível de risco</em> e <em>custos</em>.</p>
-
-      <ul>
-        <li><strong>ZARC – Zoneamento Agrícola de Risco Climático:</strong>
-          confira para o seu município a cultura, ciclo e janelas de plantio e escolha o nível de risco.<br>
-          • <a href="https://mapa-indicadores.agricultura.gov.br/publico/extensions/Zarc/Zarc.html" target="_blank" rel="noopener">Acessar o ZARC (web)</a> •
-          <a href="https://www.gov.br/agricultura/pt-br/assuntos/riscos-seguro/programa-nacional-de-zoneamento-agricola-de-risco-climatico/plantio-certo" target="_blank" rel="noopener">Baixar o app Plantio Certo</a>
-        </li>
-        <li><strong>Custos de produção (CONAB):</strong>
-          utilize as planilhas para estimar custos operacionais e coeficientes técnicos da cultura.
-          <a href="https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/custos-de-producao/planilhas-de-custos-de-producao" target="_blank" rel="noopener">Planilhas de custos</a>
-        </li>
-        <li><strong>Indicadores (IBGE):</strong>
-          consulte séries de área, produção e rendimento como referência de produtividade.
-          <a href="https://www.ibge.gov.br/explica/producao-agropecuaria/" target="_blank" rel="noopener">Indicadores agropecuários</a>
-        </li>
-      </ul>
-
-      <p>Depois das consultas, preencha os campos do formulário (área em ha, unidade, valor unitário em R$, produtividade por ha, nível tecnológico, etc.).
-        O sistema calcula automaticamente a <em>Receita do 4º ano</em>, o <em>Valor Total</em> (via custo padrão %) e, quando aplicável, o <em>Suporte Forrageiro</em>.</p>
-
-      <p class="hint">Guarde as fontes/planilhas consultadas — você poderá anexá-las ao final do projeto.</p>
-    </div>
-  </div>
-
-  </div>
 
     <form id="agr-form" class="card">
       <div class="subtitle">Informações da Cultura</div>
@@ -943,7 +903,6 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
         <div class="field row-col-3"><label for="agr-unidade">Unidade</label><select id="agr-unidade" required><option value="" selected disabled>Selecione...</option><option>Saca</option><option>Kg</option><option>Caixa</option><option>Litro</option></select></div>
         <div class="field row-col-3"><label for="agr-valorUnit">Valor Unitário (R$)</label><input id="agr-valorUnit" type="text" required placeholder="R$ 0,00" inputmode="decimal"></div>
 
-
         <div class="field row-col-3"><label for="agr-receitaAnual">Receita a partir do 4º ano (R$)</label><input id="agr-receitaAnual" type="text" readonly placeholder="R$ 0,00"></div>
         <div class="field row-col-3"><label for="agr-custoPadrao">Custo padrão (%)</label><input id="agr-custoPadrao" type="text" placeholder="0,00%" inputmode="decimal"></div>
         <div class="field row-col-3"><label for="agr-valorTotal">Valor Total (R$)</label><input id="agr-valorTotal" type="text" readonly placeholder="R$ 0,00"></div>
@@ -989,49 +948,12 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
   <!-- ======================================================= -->
   <!-- 3) ATIVIDADE PECUÁRIA                                  -->
   <!-- ======================================================= -->
-
   <section class="section" id="sec-pecuaria">
     <h1 class="title">Atividade Pecuária</h1>
-<!-- Instruções de uso – Pecuária / Suporte Forrageiro -->
-<div class="card info-use">
-  <div class="info-box">
-    <span class="info-icn" aria-hidden="true">i</span>
-    <div>
-      <div class="info-title">Instruções de uso</div>
-<p>Este módulo apoia o planejamento da pecuária, incluindo bovinocultura de leite e corte, ovinos, caprinos e suínos, auxiliando no cálculo de rebanhos, receitas e suporte forrageiro.</p>
-      <p>Baixe a planilha de apoio disponível abaixo.</p>
-      <p>Preencha os dados de animais a adquirir e de estabilização do rebanho.</p>
-      <p>A planilha fará automaticamente os cálculos de evolução do rebanho e de suporte forrageiro.</p>
-      <p>Após o preenchimento, insira os resultados nos campos abaixo (atividade, quantidade, unidade, valor unitário, custo e receita anual) para dar continuidade ao projeto.</p>
-    </div>
-  </div>
-
-  <div class="inline-actions">
-    <!-- Download da planilha -->
-    <div class="download">
-      <label class="hint">Planilha de cálculo de evolução do rebanho e Suporte Forrageiro</label><br>
-        <button type="button" class="btn outline btn-icon" title="Anexar arquivo (visual)">
-    <span class="material-symbols-outlined">Download</span>
-  </button>
-
-    </div>
-
-    <!-- “Anexar” (somente visual) -->
-    <div class="upload">
-      <label class="hint">Anexar planilha de cálculo preenchida</label>
-      <div class="input-attach">
-        <input type="text" placeholder="Selecione um arquivo..." readonly>
-        <button type="button" class="btn outline btn-icon" title="Anexar arquivo (visual)">
-    <span class="material-symbols-outlined">attach_file</span>
-  </button>
-      </div>
-    </div>
-  </div>
-</div>
 
     <form id="pec-form" class="card">
       <div class="grid">
-  <div class="field row-col-8"><label for="pec-desc">Atividade Pecuário(a)</label><select id="pec-desc" required><option value="" selected disabled>Selecione...</option><option>Apicultura</option>
+        <div class="field row-col-8"><label for="pec-desc">Atividade Pecuário(a)</label><select id="pec-desc" required><option value="" selected disabled>Selecione...</option><option>Apicultura</option>
 <option>Asinino</option>
 <option>Avicultura de corte</option>
 <option>Avicultura de postura</option>
@@ -1100,7 +1022,6 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
 <option>Bezerra búfala desmamada (fêmea)</option>
 <option>Búfalo gordo / novilho terminado (abate)</option>
 <option>Búfala de descarte (abate)</option>
-
 </select></div>
         <div class="field row-col-3"><label for="pec-quantidade">Quantidade</label><input id="pec-quantidade" type="number" step="0.01" min="0" required placeholder="0,00"></div>
         <div class="field row-col-3"><label for="pec-unidade">Unidade</label><select id="pec-unidade" required><option value="" selected disabled>Selecione...<option>Mil Pés</option>
@@ -1217,7 +1138,6 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
       </div>
     </div>
   </section>
-<!-- ======================================================= -->
 
   <!-- ======================================================= -->
   <!-- 5) CRONOGRAMA                                          -->
@@ -1312,7 +1232,7 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
           <!-- Linha PNCF -->
           <div class="field">
             <label for="fp-total-pncf">TOTAL DO FINANCIAMENTO DO PNCF</label>
-     <input id="fp-total-pncf" type="text" value="R$ 293.527,64" readonly>
+            <input id="fp-total-pncf" type="text" value="R$ 293.527,64" readonly>
           </div>
           <div class="field">
             <label for="fp-juros-pncf">JUROS PNCF</label>
@@ -1360,12 +1280,7 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
       </div>
     </div>
   </section>
-  <!-- 8) FLUXO DE CAIXA -->
-  </section>  <!-- fecha #sec-fluxo -->
 
-  
-  </section>
-<br>
 </div>   <!-- fecha .container -->
 
 <!-- seus <script> ficam aqui, abaixo -->
@@ -1408,18 +1323,13 @@ body.dark .theme-gray .sum-card{ background:#0f1a38; color:#cfe0ff }
       pec:    read('pecuaria.rows.v2', []),
       cron:   read('cronograma.rows.v1', []),
       fluxo:  read('fluxo.params.v1', {}),
-      forr:   read('forr.params.v1', {})  // se não existir, fica {}
+      forr:   read('forr.params.v1', {})
     };
     localStorage.setItem('report.snapshot.v1', JSON.stringify(snapshot));
     window.open('relatorio.html', '_blank');
   });
 })();
 </script>
-
-</body>
-</html>
-
-</div>
 
 <script>
 /* ===== util ===== */
@@ -1462,35 +1372,35 @@ function readBRLFrom(elId){ return toDec(parseBRL(document.getElementById(elId).
 `; $tb.appendChild(tr);});
     el('invest-badgeCount').textContent=`${rows.length} ${rows.length===1?'item':'itens'}`;
     el('invest-totalGeral').textContent=toBRL(soma);
-// ---- somatórios por fonte (cards) ----
-const sSIB  = rows.reduce((t,r)=> t + (r.fonte === 'SIB' ? (r.valorTotal||0) : 0), 0);
-const sPRON = rows.reduce((t,r)=> t + (r.fonte === 'PRONAF' ? (r.valorTotal||0) : 0), 0);
-const sRP   = rows.reduce((t,r)=> t + (r.fonte === 'RECURSOS PRÓPRIOS' ? (r.valorTotal||0) : 0), 0);
-const put = (id,val)=>{ const x=document.getElementById(id); if(x) x.textContent = toBRL(val); };
-put('invest-sum-sib', sSIB);
-put('invest-sum-pronaf', sPRON);   // mostrado como "PRONAF A Total (R$)"
-put('invest-sum-rp', sRP);
 
-// --- Sincroniza “TOTAL DO FINANCIAMENTO DO PRONAF” com o cartão PRONAF ---
-(function syncFluxoPronaf(totalPronaf){
-  const KEY = 'fluxo.params.v1';
+    // ---- somatórios por fonte (cards) ----
+    const sSIB  = rows.reduce((t,r)=> t + (r.fonte === 'SIB' ? (r.valorTotal||0) : 0), 0);
+    const sPRON = rows.reduce((t,r)=> t + (r.fonte === 'PRONAF' ? (r.valorTotal||0) : 0), 0);
+    const sRP   = rows.reduce((t,r)=> t + (r.fonte === 'RECURSOS PRÓPRIOS' ? (r.valorTotal||0) : 0), 0);
+    const put = (id,val)=>{ const x=document.getElementById(id); if(x) x.textContent = toBRL(val); };
+    put('invest-sum-sib', sSIB);
+    put('invest-sum-pronaf', sPRON);
+    put('invest-sum-rp', sRP);
 
+    // --- Sincroniza somente o PRONAF com o módulo do Fluxo ---
+    // (PNCF NÃO é mais alterado por Investimentos)
+    (function syncFluxoPronaf(totalPronaf){
+      const KEY = 'fluxo.params.v1';
 
-  // atualiza o input visível
-  const $pron = document.getElementById('fp-total-pronaf');
-  if ($pron) $pron.value = toBRL(totalPronaf);
+      // atualiza o input visível do PRONAF
+      const $pron = document.getElementById('fp-total-pronaf');
+      if ($pron) $pron.value = toBRL(totalPronaf);
 
-  // atualiza o localStorage usado pelo módulo do Fluxo
-   let p = {};
-  try { p = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(_){}
-  p.tpron = toDec(totalPronaf);
-  // não mexe no p.tpncf
-  localStorage.setItem(KEY, JSON.stringify(p));
+      // atualiza o localStorage usado pelo módulo do Fluxo
+      let p = {};
+      try { p = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(_){}
+      p.tpron = toDec(totalPronaf);
+      // NÃO mexe em p.tpncf (fixo)
+      localStorage.setItem(KEY, JSON.stringify(p));
 
-
-  // avisa o Fluxo para recalcular
-  document.dispatchEvent(new CustomEvent('fluxo-params-changed'));
-})(sPRON);
+      // avisa o Fluxo para recalcular
+      document.dispatchEvent(new CustomEvent('fluxo-params-changed'));
+    })(sPRON);
 
     localStorage.setItem(LS,JSON.stringify(rows));
     broadcast('invest');
@@ -2286,6 +2196,7 @@ put('invest-sum-rp', sRP);
 
 </body>
 </html>
+
 
 
 
