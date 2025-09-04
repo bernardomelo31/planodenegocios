@@ -86,7 +86,7 @@
 <body>
 <div class="container">
 
-  <h2>Plano de Assistência Técnica - PAT</h2>
+  <h2>Plano de Acompanhamento Técnico - PAT</h2>
 
   <!-- Equipe -->
   <button class="accordion">Equipe de Ater</button>
@@ -607,14 +607,17 @@
     }
 
     function abrirRelatorioNovaAba(){
-      const dados={
-        entidade:"Associação Comunitária Vale Verde",
-        estado:"MG", municipio:"Belo Horizonte",
-        imovel:"Sítio Boa Esperança",
-        beneficiario:"José da Silva",
-        valor:"R$ 12.500,00",
-        duracao:"05 anos"
-      };
+  const dados = {
+    entidade: "Associação Comunitária Vale Verde",
+    estado: "MG",
+    municipio: "Belo Horizonte",
+    imovel: "Sítio Boa Esperança",
+    beneficiario: "José da Silva",
+    cpf: "123.456.789-00",          // <-- CPF fictício
+    sncr: "000.123.456.789",        // <-- SNCR fictício (formato livre)
+    valor: "R$ 12.500,00",
+    duracao: "05 anos"
+  };
 
       const equipeHTML   = tableHTMLForReport('#tabelaEquipe');
       const atividadesHTML = [1,2,3,4,5]
@@ -676,11 +679,29 @@
             </div>
 
             <div class="table-wrap">
-              <table>
-                <thead><tr><th>NOME DO(A) BENEFICIÁRIO(A)</th></tr></thead>
-                <tbody><tr><td class="center">${dados.beneficiario}</td></tr></tbody>
-              </table>
-            </div>
+  <table>
+    <colgroup>
+      <col style="width:50%">
+      <col style="width:25%">
+      <col style="width:25%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>NOME DO(A) BENEFICIÁRIO(A)</th>
+        <th>CPF</th>
+        <th>SNCR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="center">${dados.beneficiario}</td>
+        <td class="center">${dados.cpf}</td>
+        <td class="center">${dados.sncr}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
             <div class="table-wrap">
               <table>
