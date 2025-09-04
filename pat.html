@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>PAT - Equipe e Atividades</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    *{box-sizing:border-box}
+    :root{
+      --primary:#1976d2; --primary-dark:#1565c0;
+      --bg:#f5f7fb; --card:#fff; --border:#dcdfe6;
+      --radius:8px;
+    }
+    body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:#222}
+    .container{max-width:1100px;margin:24px auto 60px;padding:0 20px}
+
+    /* Accordion */
+    .accordion{
+      width:100%;background:var(--primary);color:#fff;cursor:pointer;
+      padding:14px 16px;border:0;text-align:left;outline:0;
+      font-size:16px;border-radius:var(--radius);transition:.2s;
+      box-shadow:0 1px 2px rgba(0,0,0,.06);margin-top:14px
+    }
+    .accordion:hover{background:var(--primary-dark)}
+    .panel{
+      display:none;padding:16px;background:var(--card);border:1px solid var(--border);
+      border-radius:var(--radius);margin-top:6px
+    }
+
+    /* Card */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+      padding:16px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    h2{margin:0 0 12px}
+    h3.section-title{margin:0 0 10px}
+
+    /* Form */
+    .form-group{margin-bottom:12px}
+    label{display:block;margin-bottom:6px;font-size:14px;color:#444}
+    input,select,textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;background:#fff}
+    input[readonly],select[readonly]{background:#f0f0f0;color:#555;cursor:not-allowed}
+    textarea{resize:vertical;min-height:120px}
+    .grid{display:grid;gap:12px}
+    .grid.two{grid-template-columns:1fr}
+    @media(min-width:768px){.grid.two{grid-template-columns:repeat(2,1fr)}}
+
+    /* Checklists (Adicionais) */
+    #sec-adicionais .checklist{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(280px, 1fr));
+      gap:12px 24px; align-items:start; justify-items:start;
+    }
+    @media(max-width:900px){ #sec-adicionais .checklist{ grid-template-columns:1fr } }
+    #sec-adicionais .check-item{
+      display:grid; grid-template-columns:20px 1fr; column-gap:8px; align-items:start;
+    }
+    #sec-adicionais .check-item input{ margin-top:2px }
+    #sec-adicionais .check-item span{ text-align:left; text-justify:auto; word-break:normal; hyphens:auto }
+
+    .muted{color:#666;font-size:13px;margin:2px 0 8px}
+
+    /* Tables */
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;table-layout:fixed;margin-top:12px}
+    table,th,td{border:1px solid var(--border)}
+    th,td{padding:10px}
+    th{text-align:center;background:#f7f9ff}
+    td.num{text-align:center}
+    .center{text-align:center}
+
+    /* Buttons */
+    .btn{background:var(--primary);color:#fff;padding:10px 14px;border:0;border-radius:6px;cursor:pointer;margin-top:6px}
+    .btn:hover{background:var(--primary-dark)}
+
+    /* Assinaturas (no relatório) */
+    .sig-grid{display:grid;gap:12px;margin-top:16px;grid-template-columns:1fr}
+    @media(min-width:768px){.sig-grid{grid-template-columns:1fr 1fr}}
+    .sig-box{text-align:center;padding:12px 8px}
+    .sig-line{border-top:1px solid #999;margin:34px auto 6px;width:80%}
+    .sig-label{font-size:12px;color:#444}
+
+    /* Botão principal fora dos cards */
+    .report-actions-main{ margin:18px 0 24px; text-align:right; }
+    @media (max-width:600px){ .report-actions-main{ text-align:center; } }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h2>Plano de Acompanhamento Técnico - PAT</h2>
+
+  <!-- Equipe -->
+  <button class="accordion">Equipe de Ater</button>
+  <div class="panel">
+    <div class="grid two">
+      <div class="form-group">
+        <label>CPF*</label>
+        <input type="text" id="cpf" maxlength="14" placeholder="000.000.000-00" oninput="mascaraCPF(this)" onblur="buscarTecnico()">
+      </div>
+      <div class="form-group">
+        <label>Nome*</label>
+        <input type="text" id="nome" readonly>
+      </div>
+      <div class="form-group">
+        <label>Formação*</label>
+        <input type="text" id="formacao" readonly>
+      </div>
+      <div class="form-group">
+        <label>Email*</label>
+        <input type="text" id="email" readonly>
+      </div>
+    </div>
+
+    <button class="btn" onclick="adicionarTabelaEquipe()">ADICIONAR DADOS NA TABELA +</button>
+
+    <div class="table-wrap">
+      <table id="tabelaEquipe">
+        <thead>
+          <tr>
+            <th>Nome</th><th>Formação</th><th>CPF</th><th>Email</th><th>Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="section-title" style="margin-top:22px;">LISTA DE ATIVIDADES A SEREM DESENVOLVIDAS</h3>
+
+  <script>
+    /* ===== Config / Storage Keys ===== */
+    const VALOR_ATIVIDADE = 416.6666666666667;
+    const fmtBRL = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+    const LS = {
+      equipe:'pat_equipe',
+      proc:'pat_processo_metodologico',
+      adicionais:'pat_adicionais_ano5',
+      atividadesPrefix:'pat_atividades_ano_' // + ano
+    };
+
+    /* ===== Estado ===== */
+    let equipeList = []; // {id,nome,formacao,cpf,email}
+    const atividadesAno = {1:[],2:[],3:[],4:[],5:[]}; // {id,atividade,periodo,horas,formato,eixo,tematica}
+
+    /* ===== Equipe (dados fictícios) ===== */
+    const tecnicos = {
+      "111.111.111-11": { nome:"João Silva", formacao:"Engenheiro Agrônomo", email:"joao.agro@example.com" },
+      "222.222.222-22": { nome:"Maria Souza", formacao:"Técnico Agrícola", email:"maria.tecnico@example.com" },
+      "333.333.333-33": { nome:"Ana Oliveira", formacao:"Assistente Social", email:"ana.social@example.com" }
+    };
+
+    function mascaraCPF(input){
+      let v=input.value.replace(/\D/g,"");
+      v=v.replace(/(\d{3})(\d)/,"$1.$2");
+      v=v.replace(/(\d{3})(\d)/,"$1.$2");
+      v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
+      input.value=v;
+    }
+    function buscarTecnico(){
+      const cpf=document.getElementById('cpf').value.trim();
+      const t=tecnicos[cpf];
+      document.getElementById('nome').value=t?t.nome:"";
+      document.getElementById('formacao').value=t?t.formacao:"";
+      document.getElementById('email').value=t?t.email:"";
+    }
+
+    function renderEquipeRow(item){
+      const tbody=document.querySelector('#tabelaEquipe tbody');
+      const tr=tbody.insertRow(); tr.dataset.id=item.id;
+      tr.insertCell(0).textContent=item.nome;
+      tr.insertCell(1).textContent=item.formacao;
+      tr.insertCell(2).textContent=item.cpf;
+      tr.insertCell(3).textContent=item.email;
+      const acao=tr.insertCell(4);
+      const btn=document.createElement('button'); btn.textContent='Excluir';
+      btn.onclick=()=>{ 
+        tbody.deleteRow(tr.rowIndex-1);
+        equipeList=equipeList.filter(x=>x.id!==item.id);
+        localStorage.setItem(LS.equipe, JSON.stringify(equipeList));
+      };
+      acao.appendChild(btn);
+    }
+
+    function adicionarTabelaEquipe(){
+      const nome=document.getElementById('nome').value;
+      const formacao=document.getElementById('formacao').value;
+      const cpf=document.getElementById('cpf').value;
+      const email=document.getElementById('email').value;
+      if(!nome||!formacao||!cpf||!email){alert('Digite um CPF válido para preencher os dados.');return;}
+      const item={id:Date.now()+Math.random(),nome,formacao,cpf,email};
+      equipeList.push(item);
+      localStorage.setItem(LS.equipe, JSON.stringify(equipeList));
+      renderEquipeRow(item);
+      document.getElementById('cpf').value="";
+      document.getElementById('nome').value="";
+      document.getElementById('formacao').value="";
+      document.getElementById('email').value="";
+    }
+
+    /* ===== Atividades ===== */
+    const horasPorAtividade={
+      "Capacitação":8,"Reunião":4,"Oficina Temática":8,"Dia de Campo":8,"Intercâmbio":8,"Curso":8,
+      "Diagnóstico":2,"Visita Técnica":2,"Seminário":8,
+      "Elaboração de Projeto (PAA)":2,"Elaboração de Projeto (PNAE)":2,"Elaboração de Projeto (PRONAF)":2,
+      "Emissão de Documento (CAF)":2,"Emissão de Documento (CAR)":2,
+      "Oficina de Socialização":8,"Planejamento Participativo":8,"Atendimento remoto":1
+    };
+    const opcoesAtividade=`<option value="">Selecione</option>${Object.keys(horasPorAtividade).map(a=>`<option>${a}</option>`).join("")}`;
+    const opcoesPeriodo=`<option value="">Selecione</option><option>1º Semestre</option><option>2º Semestre</option>`;
+
+    const tematicas={
+      "Produtivo":[
+        "Boas práticas no uso e manejo dos recursos hídricos",
+        "Técnicas de armazenagem e uso racional da água (humano, animal, irrigação)",
+        "Infraestrutura hídrica e abastecimento público",
+        "Reserva hídrica e alimentar",
+        "Comercialização em mercados locais e institucionais (PNAE, PAA, feiras etc.)",
+        "Acesso a políticas públicas de apoio à produção e crédito rural",
+        "Diversificação produtiva (consórcios, rotação, sistemas integrados)",
+        "Saúde alternativa, hortas medicinais e práticas integrativas",
+        "Atividades rurais não agrícolas (turismo, artesanato, economia criativa)",
+        "Produção orgânica e agroecológica",
+        "Sistemas agroflorestais e ILPF",
+        "Extrativismo sustentável e produtos da sociobiodiversidade",
+        "Gestão financeira, custos e planejamento econômico",
+        "Agroindustrialização e agregação de valor",
+        "Açudagem de baixo impacto e tecnologias sociais de água",
+        "Sistemas simplificados de irrigação adaptados",
+        "Florestamento e reflorestamento (nativas/econômicas)",
+        "Recuperação de áreas degradadas e nascentes",
+        "Gestão de resíduos orgânicos e compostagem",
+        "Certificação participativa e controle social da qualidade",
+        "Bioeconomia e inovação sociotecnológica",
+        "Convivência com biomas locais",
+        "Produção para autoconsumo e soberania alimentar"
+      ],
+      "Promoção Social":[
+        "Cidadania e acesso a crédito, habitação rural e direitos sociais",
+        "Gestão social de políticas públicas e participação em conselhos",
+        "Proteção ao trabalhador e trabalho decente no campo",
+        "Juventude rural e sucessão familiar",
+        "Segurança alimentar, nutricional e saúde integral",
+        "Acesso a infraestrutura e equipamentos públicos coletivos",
+        "Inclusão digital e conectividade rural",
+        "Economia solidária e formalização de empreendimentos",
+        "Fortalecimento do cooperativismo e associativismo",
+        "Infraestrutura produtiva de base comunitária",
+        "Documentação familiar e regularização fundiária",
+        "Saúde da família, saúde mental e bem-estar",
+        "Segurança no campo e prevenção de conflitos",
+        "Enfrentamento à violência no campo (incluindo gênero)",
+        "Educação do campo e políticas para a infância",
+        "Atividades culturais, esportivas e de lazer",
+        "Apoio à emissão/regularização do CAF"
+      ],
+      "Ambiental":[
+        "Avaliação e mitigação de impactos ambientais",
+        "Gestão ambiental integrada da propriedade",
+        "Unidades de Referência agroecológicas e ambientais",
+        "Integração sustentável de atividades produtivas (ILPF, SAFs, aquaponia)",
+        "Manejo sustentável da água e convivência com a seca",
+        "Adaptação às mudanças climáticas",
+        "Preservação e armazenamento de sementes crioulas e florestais",
+        "Prevenção e combate a queimadas",
+        "Sistemas consorciados, integrados, agroecológicos e SAFs",
+        "Produtos com atributos ambientais e da sociobiodiversidade",
+        "Recuperação de APP e Reserva Legal",
+        "Proteção e uso sustentável de nascentes e matas ciliares",
+        "Redução do uso de agrotóxicos e manejo racional de insumos",
+        "Regularização ambiental da propriedade (ex.: CAR)",
+        "Saneamento básico rural (esgoto, resíduos, águas cinzas)",
+        "Tecnologias sociais de captação e reuso da água",
+        "Uso de bioinsumos na produção",
+        "Recuperação de áreas degradadas",
+        "Reflorestamento com espécies nativas e de uso múltiplo",
+        "Educação ambiental e mobilização comunitária",
+        "Apoio à regularização ambiental em áreas coletivas ou tradicionais"
+      ]
+    };
+
+    function criarFormulario(ano){
+      return `
+        <div class="form-group">
+          <label>Atividade*</label>
+          <select id="atividade${ano}" onchange="atualizarHorasFormato(${ano})">${opcoesAtividade}</select>
+        </div>
+        <div class="form-group">
+          <label>Período de Realização*</label>
+          <select id="periodo${ano}">${opcoesPeriodo}</select>
+        </div>
+        <div class="form-group">
+          <label>Horas*</label>
+          <input type="text" id="horas${ano}" readonly>
+        </div>
+        <div class="form-group">
+          <label>Formato*</label>
+          <input type="text" id="formato${ano}" readonly>
+        </div>
+        <div class="form-group">
+          <label>Eixo Temático*</label>
+          <select id="eixo${ano}" onchange="carregarTematicas(${ano})">
+            <option value="">Selecione</option>
+            <option>Produtivo</option>
+            <option>Promoção Social</option>
+            <option>Ambiental</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Temática*</label>
+          <select id="tematica${ano}">
+            <option value="">Selecione o eixo primeiro</option>
+          </select>
+        </div>
+        <button class="btn" onclick="adicionarAtividade(${ano})">ADICIONAR ATIVIDADE ANO ${ano} +</button>
+        <div class="table-wrap">
+          <table id="tabelaAtividades${ano}">
+            <thead>
+              <tr>
+                <th>Atividade</th><th>Período</th><th>Horas</th><th>Formato</th><th>Eixo</th><th>Temática</th><th>Ações</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>`;
+    }
+
+    // Accordions Ano 1..5
+    for(let ano=1; ano<=5; ano++){
+      document.write(`<button class="accordion">Atividades - Ano ${ano}</button>`);
+      document.write(`<div class="panel" id="ano${ano}"></div>`);
+    }
+
+    // Adicionais + Processo Metodológico (mesma section)
+    document.write(`
+      <section class="card" id="sec-adicionais">
+        <h3 class="section-title">Adicionais a serem trabalhados com os beneficiários</h3>
+        <p class="muted">Selecione os adicionais que serão trabalhados junto aos beneficiários.</p>
+        <div id="adicionaisAno5" class="checklist"></div>
+
+        <hr style="border:0;height:1px;background:#e6e9f0;margin:14px 0;">
+
+        <ul class="orientacoes" style="margin:0 0 10px 18px;line-height:1.4;">
+          <li>Descrever quais as técnicas e/ou metodologias serão utilizadas na realização das atividades individuais ou coletivas;</li>
+          <li>Relacionar quais os materiais didáticos de apoio serão utilizados nas atividades;</li>
+          <li>Informar quais as formas de comprovação serão utilizadas na prestação de contas da atividade.</li>
+        </ul>
+        <h3 class="section-title">PROCESSO METODOLÓGICO A SER DESENVOLVIDO</h3>
+        <textarea id="processoMetodologico" placeholder="Descreva aqui o processo metodológico (técnicas/metodologias, materiais didáticos e formas de comprovação)."></textarea>
+      </section>
+    `);
+
+    // Cronogramas (SEM botão aqui)
+    document.write(`
+      <section class="card">
+        <h3 class="section-title">CRONOGRAMA DE METAS DE EXECUÇÃO DOS SERVIÇOS DE ATER</h3>
+        <div class="table-wrap">
+          <table id="tabelaAtividadesQtd">
+            <colgroup>
+              <col style="width:14.2857%"><col style="width:14.2857%"><col style="width:14.2857%">
+              <col style="width:14.2857%"><col style="width:14.2857%"><col style="width:14.2857%"><col style="width:14.2857%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Metas</th><th>Ano I</th><th>Ano II</th><th>Ano III</th><th>Ano IV</th><th>Ano V</th><th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="linhaMetaInd"></tr>
+              <tr id="linhaMetaCol"></tr>
+              <tr id="linhaMetaTot"></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3 class="section-title">CRONOGRAMA DE DESEMBOLSO ANUAL E POR SEMESTRE</h3>
+        <div class="table-wrap">
+          <table id="tabelaPagamento">
+            <colgroup>
+              <col style="width:14.2857%"><col style="width:14.2857%"><col style="width:14.2857%">
+              <col style="width:14.2857%"><col style="width:14.2857%"><col style="width:14.2857%"><col style="width:14.2857%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Semestre</th><th>Ano I</th><th>Ano II</th><th>Ano III</th><th>Ano IV</th><th>Ano V</th><th>Total Geral</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="linhaSem1"></tr>
+              <tr id="linhaSem2"></tr>
+              <tr id="linhaTotalAno"></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    `);
+
+    // Botão principal FORA dos cards
+    document.write(`
+      <div class="report-actions-main">
+        <button class="btn" type="button" onclick="abrirRelatorioNovaAba()">Gerar Relatório em outra aba</button>
+      </div>
+    `);
+
+    /* ===== Adicionais (lista) ===== */
+    const adicionaisLista=[
+      "Produção agroecológica",
+      "Implantação de Sistemas Agroflorestais (SAF)",
+      "Integração Lavoura, Pecuária e Floresta (ILPF)",
+      "Sistemas Agrofotovoltaicos de base agroecológica",
+      "Comercialização pelo Programa de Aquisição de Alimentos (PAA)",
+      "Comercialização pelo Programa Nacional de Alimentação Escolar (PNAE)",
+      "Contratação de crédito rural – Pronaf A"
+    ];
+
+    /* ===== Lifecycle ===== */
+    window.onload=function(){
+      // Monta formularios anos
+      for(let ano=1; ano<=5; ano++){
+        document.getElementById('ano'+ano).innerHTML=criarFormulario(ano);
+      }
+      // Render adicionais
+      const cont=document.getElementById('adicionaisAno5');
+      cont.innerHTML=adicionaisLista.map((t,i)=>(
+        `<label class="check-item"><input type="checkbox" value="${t}" id="ad5_${i}"><span>${t}</span></label>`
+      )).join("");
+
+      // Restore localStorage (equipe, atividades, processo, adicionais)
+      restoreEquipe();
+      for(let ano=1; ano<=5; ano++) restoreAtividades(ano);
+      restoreProcesso();
+      restoreAdicionais();
+
+      atualizarCronogramas();
+    };
+
+    /* ===== Atualizadores ===== */
+    function atualizarHorasFormato(ano){
+      const atividade=document.getElementById('atividade'+ano).value;
+      const horas=horasPorAtividade[atividade]||"";
+      const formato=(horas==8||horas==4)?"Coletivo":((horas==1||horas==2)?"Individual":"");
+      document.getElementById('horas'+ano).value=horas?`${horas} horas`:"";
+      document.getElementById('formato'+ano).value=formato;
+    }
+    function carregarTematicas(ano){
+      const eixo=document.getElementById('eixo'+ano).value;
+      const sel=document.getElementById('tematica'+ano);
+      sel.innerHTML="<option value=''>Selecione</option>";
+      (tematicas[eixo]||[]).forEach(t=>{
+        const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o);
+      });
+    }
+
+    function renderAtividadeRow(ano,item){
+      const tbody=document.querySelector('#tabelaAtividades'+ano+' tbody');
+      const tr=tbody.insertRow(); tr.dataset.id=item.id;
+      tr.insertCell(0).textContent=item.atividade;
+      tr.insertCell(1).textContent=item.periodo;
+      tr.insertCell(2).textContent=item.horas;
+      tr.insertCell(3).textContent=item.formato;
+      tr.insertCell(4).textContent=item.eixo;
+      tr.insertCell(5).textContent=item.tematica;
+      const acao=tr.insertCell(6);
+      const btn=document.createElement('button'); btn.textContent='Excluir';
+      btn.onclick=function(){
+        tbody.deleteRow(tr.rowIndex-1);
+        atividadesAno[ano]=atividadesAno[ano].filter(a=>a.id!==item.id);
+        localStorage.setItem(LS.atividadesPrefix+ano, JSON.stringify(atividadesAno[ano]));
+        atualizarCronogramas();
+      };
+      acao.appendChild(btn);
+    }
+
+    function adicionarAtividade(ano){
+      const atividade=document.getElementById('atividade'+ano).value;
+      const periodo=document.getElementById('periodo'+ano).value;
+      const horas=document.getElementById('horas'+ano).value;
+      const formato=document.getElementById('formato'+ano).value;
+      const eixo=document.getElementById('eixo'+ano).value;
+      const tematica=document.getElementById('tematica'+ano).value;
+
+      if(!atividade||!periodo||!horas||!formato||!eixo||!tematica){ alert('Preencha todos os campos do Ano '+ano+'!'); return; }
+
+      const item={id:Date.now()+Math.random(),atividade,periodo,horas,formato,eixo,tematica};
+      atividadesAno[ano].push(item);
+      localStorage.setItem(LS.atividadesPrefix+ano, JSON.stringify(atividadesAno[ano]));
+      renderAtividadeRow(ano,item);
+
+      // limpa form
+      document.getElementById('atividade'+ano).value="";
+      document.getElementById('periodo'+ano).value="";
+      document.getElementById('horas'+ano).value="";
+      document.getElementById('formato'+ano).value="";
+      document.getElementById('eixo'+ano).value="";
+      document.getElementById('tematica'+ano).innerHTML="<option value=''>Selecione o eixo primeiro</option>";
+
+      atualizarCronogramas();
+    }
+
+    function atualizarCronogramas(){
+      // METAS (individuais / coletivas / total por ano + total geral)
+      let rowInd=`<td><b>Individuais</b></td>`;
+      let rowCol=`<td><b>Coletivas</b></td>`;
+      let rowTot=`<td><b>Total</b></td>`;
+      let totInd=0,totCol=0,totGeral=0;
+
+      for(let ano=1; ano<=5; ano++){
+        const lista=atividadesAno[ano];
+        const ind=lista.filter(a=>a.formato==="Individual").length;
+        const col=lista.filter(a=>a.formato==="Coletivo").length;
+        const tt=ind+col;
+        totInd+=ind; totCol+=col; totGeral+=tt;
+        rowInd+=`<td class="num">${ind}</td>`;
+        rowCol+=`<td class="num">${col}</td>`;
+        rowTot+=`<td class="num"><b>${tt}</b></td>`;
+      }
+      rowInd+=`<td class="num"><b>${totInd}</b></td>`;
+      rowCol+=`<td class="num"><b>${totCol}</b></td>`;
+      rowTot+=`<td class="num"><b>${totGeral}</b></td>`;
+      document.getElementById('linhaMetaInd').innerHTML=rowInd;
+      document.getElementById('linhaMetaCol').innerHTML=rowCol;
+      document.getElementById('linhaMetaTot').innerHTML=rowTot;
+
+      // FINANCEIRO (desembolso por semestre + total por ano + total geral)
+      let rowSem1=`<td><b>1º Semestre</b></td>`;
+      let rowSem2=`<td><b>2º Semestre</b></td>`;
+      let rowTotalAno=`<td><b>Total por Ano</b></td>`;
+      let totalSem1=0,totalSem2=0,totalGeral=0;
+
+      for(let ano=1; ano<=5; ano++){
+        const lista=atividadesAno[ano];
+        const qtd1=lista.filter(a=>a.periodo==="1º Semestre").length;
+        const qtd2=lista.filter(a=>a.periodo==="2º Semestre").length;
+        const val1=qtd1*VALOR_ATIVIDADE, val2=qtd2*VALOR_ATIVIDADE, somaAno=val1+val2;
+        rowSem1+=`<td class="center">${fmtBRL(val1)}</td>`;
+        rowSem2+=`<td class="center">${fmtBRL(val2)}</td>`;
+        rowTotalAno+=`<td class="center"><b>${fmtBRL(somaAno)}</b></td>`;
+        totalSem1+=val1; totalSem2+=val2; totalGeral+=somaAno;
+      }
+      rowSem1+=`<td class="center"><b>${fmtBRL(totalSem1)}</b></td>`;
+      rowSem2+=`<td class="center"><b>${fmtBRL(totalSem2)}</b></td>`;
+      rowTotalAno+=`<td class="center"><b>${fmtBRL(totalGeral)}</b></td>`;
+      document.getElementById('linhaSem1').innerHTML=rowSem1;
+      document.getElementById('linhaSem2').innerHTML=rowSem2;
+      document.getElementById('linhaTotalAno').innerHTML=rowTotalAno;
+    }
+
+    /* ===== Persistência ===== */
+    function restoreEquipe(){
+      try{
+        const arr=JSON.parse(localStorage.getItem(LS.equipe)||'[]');
+        if(Array.isArray(arr)){ equipeList=arr; equipeList.forEach(renderEquipeRow); }
+      }catch(e){}
+    }
+    function restoreAtividades(ano){
+      try{
+        const arr=JSON.parse(localStorage.getItem(LS.atividadesPrefix+ano)||'[]');
+        if(Array.isArray(arr)){ atividadesAno[ano]=arr; arr.forEach(it=>renderAtividadeRow(ano,it)); }
+      }catch(e){}
+    }
+    // Processo metodológico: carrega e salva com debounce
+    (function(){
+      function ready(){
+        const pm=document.getElementById('processoMetodologico'); if(!pm) return;
+        const saved=localStorage.getItem(LS.proc); if(saved!==null) pm.value=saved;
+        let t; pm.addEventListener('input',()=>{ clearTimeout(t); t=setTimeout(()=>localStorage.setItem(LS.proc, pm.value),300); });
+      }
+      if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',ready); else ready();
+    })();
+    function restoreProcesso(){ /* carregado no IIFE acima */ }
+
+    // Adicionais
+    function restoreAdicionais(){
+      const saved=JSON.parse(localStorage.getItem(LS.adicionais)||'[]');
+      const boxes=[...document.querySelectorAll('#adicionaisAno5 input[type=checkbox]')];
+      boxes.forEach(cb=>{ cb.checked=saved.includes(cb.value); cb.addEventListener('change',saveAdicionais); });
+    }
+    function saveAdicionais(){
+      const sel=[...document.querySelectorAll('#adicionaisAno5 input[type=checkbox]:checked')].map(cb=>cb.value);
+      localStorage.setItem(LS.adicionais, JSON.stringify(sel));
+    }
+
+    /* ===== UI ===== */
+    document.addEventListener('click',e=>{
+      if(e.target.classList.contains('accordion')){
+        e.target.classList.toggle('active');
+        const panel=e.target.nextElementSibling;
+        panel.style.display = panel.style.display==='block' ? 'none' : 'block';
+      }
+    });
+
+    /* ===== Relatório em nova aba ===== */
+    function tableHTMLForReport(selector){
+      const src=document.querySelector(selector);
+      if(!src) return `<p style="margin:8px 0;color:#666;">(Sem dados)</p>`;
+      const clone=src.cloneNode(true);
+      const ths=clone.tHead?Array.from(clone.tHead.rows[0].cells):[];
+      const idx=ths.findIndex(th=>th.textContent.trim().toLowerCase()==='ações');
+      if(idx>=0){
+        clone.tHead.rows[0].deleteCell(idx);
+        Array.from(clone.tBodies[0].rows).forEach(r=>{ if(r.cells[idx]) r.deleteCell(idx); });
+      }
+      return clone.outerHTML;
+    }
+
+    function abrirRelatorioNovaAba(){
+      const dados={
+        entidade:"Associação Comunitária Vale Verde",
+        estado:"MG", municipio:"Belo Horizonte",
+        imovel:"Sítio Boa Esperança",
+        beneficiario:"José da Silva",
+        valor:"R$ 12.500,00",
+        duracao:"05 anos"
+      };
+
+      const equipeHTML   = tableHTMLForReport('#tabelaEquipe');
+      const atividadesHTML = [1,2,3,4,5]
+        .map(ano=>`<h3 style="margin:10px 0;">ATIVIDADES — ANO ${ano}</h3>${tableHTMLForReport('#tabelaAtividades'+ano)}`)
+        .join('');
+
+      const ad5 = Array.from(document.querySelectorAll('#adicionaisAno5 input[type=checkbox]:checked')).map(cb=>cb.value);
+      const adicionaisSection = `
+        <div class="card"><h3>ADICIONAIS</h3>
+          ${ad5.length ? `<ul>${ad5.map(t=>`<li>${t}</li>`).join('')}</ul>`
+                       : '<p style="margin:8px 0;color:#666;">(Nenhum adicional selecionado)</p>'}
+        </div>`;
+
+      // Sanitiza texto do processo (evita fechar <script>)
+      const safe = s => String(s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/<\/script/gi,'<\\/script');
+      const pm = safe(document.getElementById('processoMetodologico')?.value || '');
+
+      const cronQtdHTML = tableHTMLForReport('#tabelaAtividadesQtd');
+      const cronPagHTML = tableHTMLForReport('#tabelaPagamento');
+
+      const css = `
+        *{box-sizing:border-box}:root{--primary:#1976d2;--border:#dcdfe6;--card:#fff;--bg:#f5f7fb}
+        body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:#222}
+        .container{max-width:1100px;margin:24px auto 48px;padding:0 20px}
+        .card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+        h2{margin:0 0 14px}h3{margin:10px 0}.table-wrap{overflow-x:auto;margin-top:10px}
+        table{width:100%;border-collapse:collapse;table-layout:fixed}table,th,td{border:1px solid var(--border)}th,td{padding:10px}
+        th{text-align:center;background:#f7f9ff}td.center{text-align:center}
+        .pm-text{white-space:pre-wrap;border:1px solid var(--border);border-radius:6px;padding:10px;background:#fff}
+        .sig-grid{display:grid;gap:12px;margin-top:16px;grid-template-columns:1fr}
+        @media(min-width:768px){.sig-grid{grid-template-columns:1fr 1fr}}
+        .sig-box{text-align:center;padding:12px 8px}.sig-line{border-top:1px solid #999;margin:34px auto 6px;width:80%}.sig-label{font-size:12px;color:#444}
+        .btn{background:#1976d2;color:#fff;border:0;border-radius:6px;padding:10px 14px;cursor:pointer}
+        .report-actions{margin:18px 0 24px;text-align:right}
+        @media(max-width:600px){.report-actions{text-align:center}}
+      `;
+
+      const html = `<!DOCTYPE html><html lang="pt-BR"><head>
+        <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Relatório — PAT / ATER</title><style>${css}</style></head><body>
+        <div class="container">
+          <div class="card"><h2>PLANO DE ASSISTÊNCIA TÉCNICA - PAT</h2>
+
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>NOME DA ENTIDADE</th></tr></thead>
+                <tbody><tr><td class="center">${dados.entidade}</td></tr></tbody>
+              </table>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <colgroup><col style="width:33.33%"><col style="width:33.33%"><col style="width:33.34%"></colgroup>
+                <thead><tr><th>ESTADO</th><th>MUNICÍPIO</th><th>IMÓVEL</th></tr></thead>
+                <tbody><tr><td class="center">${dados.estado}</td><td class="center">${dados.municipio}</td><td class="center">${dados.imovel}</td></tr></tbody>
+              </table>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>NOME DO(A) BENEFICIÁRIO(A)</th></tr></thead>
+                <tbody><tr><td class="center">${dados.beneficiario}</td></tr></tbody>
+              </table>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+                <thead><tr><th>VALOR DESTINADO PARA ATER</th><th>DURAÇÃO DO CONTRATO DE ATER</th></tr></thead>
+                <tbody><tr><td class="center">${dados.valor}</td><td class="center">${dados.duracao}</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card"><h3>EQUIPE DE ATER</h3><div class="table-wrap">${equipeHTML}</div></div>
+          <div class="card">${atividadesHTML}</div>
+          ${adicionaisSection}
+          <div class="card"><h3>PROCESSO METODOLÓGICO A SER DESENVOLVIDO</h3><div class="pm-text">${pm||'(Sem descrição)'}</div></div>
+          <div class="card"><h3>CRONOGRAMA DE METAS DE EXECUÇÃO DOS SERVIÇOS DE ATER</h3><div class="table-wrap">${cronQtdHTML}</div></div>
+
+          <div class="card"><h3>CRONOGRAMA DE ATIVIDADES ANUAIS</h3><div class="table-wrap">${cronPagHTML}</div></div>
+
+          <div class="card">
+            <div class="sig-grid">
+              <div class="sig-box"><div class="sig-line"></div><div class="sig-label">Assinatura do(a) Beneficiário(a)</div></div>
+              <div class="sig-box"><div class="sig-line"></div><div class="sig-label">Assinatura da Entidade de ATER</div></div>
+            </div>
+          </div>
+
+          <div class="report-actions">
+            <button class="btn" onclick="window.print()">Imprimir</button>
+          </div>
+        </div></body></html>`;
+
+      const win = window.open('', '_blank');
+      if(!win){ alert('Bloqueador de pop-up ativo. Permita pop-ups para abrir o relatório.'); return; }
+      win.document.open();
+      win.document.write(html);
+      win.document.close();
+      win.focus();
+    }
+
+    // expõe a função para o botão
+    window.abrirRelatorioNovaAba = abrirRelatorioNovaAba;
+  </script>
+
+  <!-- Botão principal: fora de qualquer card -->
+  <!-- (Já escrito acima via document.write como .report-actions-main) -->
+
+</div>
+</body>
+</html>
